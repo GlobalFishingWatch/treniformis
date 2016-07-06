@@ -7,6 +7,15 @@ Global Fishing Watch vessel lists.  Very alpha.
     :target: https://travis-ci.com/GlobalFishingWatch/treniformis
 
 
+Example
+-------
+
+.. code-block:: python
+
+    import treniformis
+    treniformis.get_annual_list_path('GFW/WKV/FISHING/KNOWN/2016')
+
+
 Developing
 ----------
 
