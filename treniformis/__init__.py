@@ -38,78 +38,24 @@ for the publised lists. Or are old and are kept around for reference
 """
 
 
-import glob
 import os
 
 
-def _path(*subpaths):
-    here = os.path.dirname(__file__)
-    return os.path.join(here, *subpaths)
+def get_annual_list(asset_id):
+    """Get a path to an MMSI list, which is probably a text file with a single
+    MMSI per line.
 
+    This is an MVP API that will almost certainly be deprecated at some point.
+    Do not construct file paths directly.
 
-def _load_mmsis_by_year(
-        name, path, year_index, pattern="*.txt", readme="README.md"):
+    Parameters
+    ----------
+    asset_id : str
+        Like ``GFW/WKV/KNOWN_FISHING/2014``.
 
-    if readme:
-        with open(_path(path, readme)) as f:
-            doc = f.read()
-    else:
-        doc = None
-    mmsi_map = type(name, (dict,), {"__doc__": doc})
-    paths = glob.glob(_path(path, pattern))
-    mmsi_map = mmsi_map()
-    for p in paths:
-        name, _ = os.path.splitext(os.path.basename(p))
-        year = int(name.split('-')[year_index])
-        mmsi = [x.strip() for x in open(p).read().strip().split('\n')]
-        mmsi_map[year] = mmsi
-    return mmsi_map
-
-
-def _load_list(name, path, readme=None):
-    if readme:
-        with open(_path(path, readme)) as f:
-            doc = f.read()
-    else:
-        doc = None
-    list_like = type(name, (list,), {"__doc__": doc})
-    full_path = _path(path, name)
-    with open(full_path).read() as f:
-        lines = f.splitlines()
-    return list_like([x.strip() for x in lines])
-
-
-active_mmsis = _load_mmsis_by_year(
-    name="active_mmsis",
-    path="exported/active-mmsis/active-mmsis-v1",
-    year_index=2)
-
-known_fishing = _load_mmsis_by_year(
-    name="known_fishing",
-    path="known-fishing/known-fishing-v1",
-    year_index=2)
-
-likely_fishing = _load_mmsis_by_year(
-    name="likely_fishing",
-    path="exported/likely-fishing/likely-fishing-v2",
-    year_index=2)
-
-spoofing = _load_mmsis_by_year(
-    name="spoofing",
-    path="exported/spoofing/spoofing-mmsis-v3",
-    year_index=2)
-
-known_likely_fishing = _load_mmsis_by_year(
-    name="known_likely_fishing",
-    path="published",
-    year_index=4,
-    pattern="known-likely-fishing-mmsis-*.txt",
-    readme=None)
-
-
-vessel_classes = _load_list(
-    name="vessel_classes.md",
-    path="",
-    readme=None)
-
-classification_lists_path = _path("internal/classification_lists")
+    Returns
+    -------
+    str
+        File path.
+    """
+    return os.path.join(os.path.dirname(__file__), '{}.txt'.format(asset_id))
