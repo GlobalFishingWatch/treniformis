@@ -23,12 +23,12 @@ YEARS = (2012, 2013, 2014, 2015, 2016)
     [('GFW/WKV/FISHING/LIKELY/{}'.format(y), pjoin(BASEDIR, 'GFW', 'WKV', 'FISHING', 'LIKELY', '{}.txt'.format(y))) for y in (2014, 2015)]
 )
 def test_list_exists(asset_id, expected):
-    actual = treniformis.get_annual_list(asset_id)
+    actual = treniformis.get_annual_list_path(asset_id)
     assert expected == actual
     assert os.path.exists(actual)
     assert os.path.exists(expected)
 
 
-def test_get_annual_list_exception():
+def test_get_annual_list_path_exception():
     with pytest.raises(errors.TreniformisIOError):
-        treniformis.get_annual_list('INVALID_ID')
+        treniformis.get_annual_list_path('INVALID_ID')

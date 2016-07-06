@@ -12,7 +12,7 @@ https://github.com/GlobalFishingWatch/treniformis
 """
 
 
-from treniformis._mvp_api import get_annual_list
+from treniformis._mvp_api import get_annual_list_path
 
 
 __version__ = '0.0.1'

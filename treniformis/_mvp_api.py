@@ -6,7 +6,7 @@ import os
 from treniformis import errors
 
 
-def get_annual_list(asset_id):
+def get_annual_list_path(asset_id):
     """Get a path to an MMSI list, which is probably a text file with a single
     MMSI per line.
 
