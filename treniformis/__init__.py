@@ -58,4 +58,5 @@ def get_annual_list(asset_id):
     str
         File path.
     """
-    return os.path.join(os.path.dirname(__file__), '{}.txt'.format(asset_id))
+    return os.path.join(
+        os.path.dirname(__file__), '_assets', '{}.txt'.format(asset_id))
