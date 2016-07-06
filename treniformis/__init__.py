@@ -1,40 +1,14 @@
-"""
+"""Treniformis: Global Fishing Watch vessel lists
 
-MMSI Lists
-----------
+Currently the API only produces paths to files, which should only be constructed
+like:
 
-The following attributes are dict-like objects that contain lists
-of MMSI, typically indexed by year. Documentation 
-is available for them using `help(obj)` or `print(obj.__doc__)`:
+    import treniformis
+    treniformis.get_annual_list('GFW/WKV/FISHING/LIKELY')
 
-* active_mmsis: MMSI asociated with a significant number of AIS 
-  messages
+and never directly constructed.  See the readme for more information.
 
-
-* known_fishing: vessels known to be fishing based on lists or manual 
-  classification
-
-
-* likely_fishing: vessels likely fishing based on AIS messages
-
-
-* known_likely_fishing: combination of known and likely MMSI lists
-
-    
-* spoofing: MMSI that appear to be associated with spoofing.
-
-
-Additional Items
-----------------
-
-vessel_classes: list of classes used in manual and NNet classification
-
-clasification_lists_path: path to directory of miscelaneous classification lists
-
-
-In addition to the stuff documented above there are many items
-installed in `internal` that are primarily used as the sources
-for the publised lists. Or are old and are kept around for reference
+https://github.com/GlobalFishingWatch/treniformis
 """
 
 

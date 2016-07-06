@@ -1,10 +1,21 @@
 treniformis
 ===========
 
-Global Fishing Watch vessel lists
+Global Fishing Watch vessel lists.  Very alpha.
 
 .. image:: https://travis-ci.com/GlobalFishingWatch/treniformis.svg?token=tu7qmzYG3ruJYdnto4aT&branch=master
     :target: https://travis-ci.com/GlobalFishingWatch/treniformis
+
+
+Developing
+----------
+
+.. code-block:: console
+
+    $ git clone https://github.com/GlobalFishingWatch/treniformis
+    $ cd treniformis
+    $ pip install -e .\[all\]
+    $ py.test --cov treniformis --cov-report term-missing
 
 
 Lists
