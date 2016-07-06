@@ -59,7 +59,7 @@ with open('README.rst') as f:
     readme = f.read()
 
 
-extra_reqs = {'test': ['pytest>=2.8.2']}
+extra_reqs = {'test': ['pytest>=2.8.2', 'pytest-cov>=2.2.0']}
 
 # Add all extra requirements
 extra_reqs['all'] = list(set(itertools.chain(*extra_reqs.values())))
