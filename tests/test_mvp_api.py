@@ -10,7 +10,8 @@ import treniformis
 from treniformis import errors
 
 
-BASEDIR = pjoin(os.path.abspath('treniformis'), '_assets')
+BASEDIR = os.path.dirname(treniformis.__file__)
+BASEDIR = pjoin(BASEDIR, '_assets')
 YEARS = (2012, 2013, 2014, 2015, 2016)
 
 
