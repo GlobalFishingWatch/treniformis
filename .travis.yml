@@ -5,6 +5,7 @@ cache: pip
 python:
   - 2.7
   - 3.4
+  - 3.4
   - 3.5
 
 before_install:
@@ -15,6 +16,3 @@ install:
 
 script:
   - py.test --cov treniformis --cov-report term-missing
-
-after_success:
-  - coveralls || echo "!! intermittent coveralls failure"

@@ -27,16 +27,14 @@ def _parse_dunder(dunder, line):
     return item
 
 
-# Grab all non python files in the treniformis
-# tree
-here = os.path.dirname(__file__)
+root_dir = os.path.dirname(__file__)
 data_files = []
-for root, dirs, files in os.walk(os.path.join(here, 'treniformis')):
-    dirs[:] = [x for x in dirs if not x.startswith('.')]
-    for filename in files: 
-        name, ext = os.path.splitext(filename)
+for root, _, paths in os.walk(os.path.join(root_dir, 'treniformis')):
+    paths = filter(lambda x: not x.startswith('.'), paths)
+    for p in paths:
+        name, ext = os.path.splitext(p)
         if ext not in ['.py', '.pyc']:
-            data_files.append(os.path.join(root, filename))
+            data_files.append(os.path.join(root, p))
 
 
 version = None
@@ -61,7 +59,7 @@ with open('README.rst') as f:
     readme = f.read()
 
 
-extra_reqs = {'test': ['pytest>=2.8.2', 'pytest-cov>=2.2.0']}
+extra_reqs = {'test': ['pytest>=2.8.2']}
 
 # Add all extra requirements
 extra_reqs['all'] = list(set(itertools.chain(*extra_reqs.values())))
