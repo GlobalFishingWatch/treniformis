@@ -1,3 +1,19 @@
+Likely Fishing
+==============
+
+Needs a description.
+
+
+Migration
+---------
+
+Files that were deleted during the migration from `vessel-lists`, but whose
+content needs to be preserved.
+
+
+### make-published.py ###
+
+```python
 """
 Combine multiple mmsi lists to produce the final known-likely fishing vessel lists
 that are used to determine which vessels are treated as fishing vessels
@@ -61,5 +77,4 @@ for item in known_likely_lists:
     with open(item['output'], 'w') as outfile:
         for mmsi in mmsis:
             outfile.write(mmsi)
-
-
+```
