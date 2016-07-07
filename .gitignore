@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# PyCharm
+.idea/
+
+# Project
+ignore/
+buh.py
