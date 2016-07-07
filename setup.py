@@ -11,7 +11,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-def _parse_dunder(dunder, line):
+def _parse_dunder(line):
 
     """Parse a line like:
 
@@ -44,13 +44,13 @@ source = None
 with open(os.path.join('treniformis', '__init__.py')) as f:
     for line in f:
         if line.find('__version__') >= 0:
-            version = _parse_dunder('__version__', line)
+            version = _parse_dunder(line)
         elif line.find('__author__') >= 0:
-            author = _parse_dunder('__author__', line)
+            author = _parse_dunder(line)
         elif line.find('__email__') >= 0:
-            email = _parse_dunder('__email__', line)
+            email = _parse_dunder(line)
         elif line.find('__source__') >= 0:
-            source = _parse_dunder('__source__', line)
+            source = _parse_dunder(line)
         elif None not in (version, author, email, source):
             break
 
@@ -96,5 +96,6 @@ setup(
     url=source,
     keywords='GFW Global Fishing Watch vessel lists',
     zip_safe=True,
-    extras_require=extra_reqs
+    extras_require=extra_reqs,
+    install_requires=['six']
 )
