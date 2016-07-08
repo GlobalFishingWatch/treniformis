@@ -1,0 +1,18 @@
+language: python
+sudo: false
+cache: pip
+
+python:
+  - 2.7
+  - 3.3
+  - 3.4
+  - 3.5
+
+before_install:
+  - pip install pip setuptools --upgrade
+
+install:
+  - pip install .\[all\]
+
+script:
+  - py.test --cov treniformis --cov-report term-missing
