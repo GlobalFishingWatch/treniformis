@@ -138,9 +138,9 @@ def build_combined_fishing_list(year):
     else:
         known_year = year
 
-    known_fishing_id = 'GFW/FISHING/KNOWN/{}'.format(known_year)
-    likely_fishing_id = 'GFW/FISHING/LIKELY/{}'.format(year)
-    active_mmsis_id = 'GFW/ACTIVE_MMSIS/{}'.format(year)
+    known_fishing_id = 'GFW/FISHING_MMSI/KNOWN/{}'.format(known_year)
+    likely_fishing_id = 'GFW/FISHING_MMSI/LIKELY/{}'.format(year)
+    active_mmsis_id = 'GFW/ACTIVE_MMSI/{}'.format(year)
 
     known_path = get_annual_list_path(known_fishing_id)
     likely_path = get_annual_list_path(likely_fishing_id)

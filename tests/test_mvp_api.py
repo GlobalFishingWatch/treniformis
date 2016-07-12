@@ -16,10 +16,10 @@ YEARS = (2012, 2013, 2014, 2015, 2016)
 
 
 @pytest.mark.parametrize("asset_id,expected",
-    [('GFW/ACTIVE_MMSIS/{}'.format(y), pjoin(BASEDIR, 'GFW', 'ACTIVE_MMSIS', '{}.txt'.format(y))) for y in YEARS] +
-    [('GFW/FISHING/KNOWN/{}'.format(y), pjoin(BASEDIR, 'GFW', 'FISHING', 'KNOWN', '{}.txt'.format(y))) for y in (2014, 2015)] +
-    [('GFW/FISHING/LIKELY/{}'.format(y), pjoin(BASEDIR, 'GFW', 'FISHING', 'LIKELY', '{}.txt'.format(y))) for y in YEARS] +
-    [('GFW/SPOOFING/{}'.format(y), pjoin(BASEDIR, 'GFW', 'SPOOFING', '{}.txt'.format(y))) for y in YEARS]
+    [('GFW/ACTIVE_MMSI/{}'.format(y), pjoin(BASEDIR, 'GFW', 'ACTIVE_MMSI', '{}.txt'.format(y))) for y in YEARS] +
+    [('GFW/FISHING_MMSI/KNOWN/{}'.format(y), pjoin(BASEDIR, 'GFW', 'FISHING_MMSI', 'KNOWN', '{}.txt'.format(y))) for y in (2014, 2015)] +
+    [('GFW/FISHING_MMSI/LIKELY/{}'.format(y), pjoin(BASEDIR, 'GFW', 'FISHING_MMSI', 'LIKELY', '{}.txt'.format(y))) for y in YEARS] +
+    [('GFW/SPOOFING_MMSI/{}'.format(y), pjoin(BASEDIR, 'GFW', 'SPOOFING_MMSI', '{}.txt'.format(y))) for y in YEARS]
 )
 def test_list_exists(asset_id, expected):
     actual = treniformis.get_annual_list_path(asset_id)
@@ -47,11 +47,11 @@ def test_build_combined_fishing_list_clean(year):
         known_year = year
 
     known_path = treniformis.get_annual_list_path(
-        'GFW/FISHING/KNOWN/{}'.format(known_year))
+        'GFW/FISHING_MMSI/KNOWN/{}'.format(known_year))
     likely_path = treniformis.get_annual_list_path(
-        'GFW/FISHING/LIKELY/{}'.format(year))
+        'GFW/FISHING_MMSI/LIKELY/{}'.format(year))
     active_path = treniformis.get_annual_list_path(
-        'GFW/ACTIVE_MMSIS/{}'.format(year))
+        'GFW/ACTIVE_MMSI/{}'.format(year))
 
     with open(known_path) as f:
         known_mmsis = set((l.strip() for l in f))
