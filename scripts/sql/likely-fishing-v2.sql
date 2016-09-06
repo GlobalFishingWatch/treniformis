@@ -21,7 +21,8 @@ JOIN EACH
     integer(mmsi) as mmsi, COUNT(*) AS c_pos
   FROM (TABLE_DATE_RANGE([pipeline_normalize.], TIMESTAMP('{{START_DATE}}'), TIMESTAMP('{{END_DATE}}')))
   WHERE
-    lat IS NOT NULL AND lon IS NOT NULL
+    lat IS NOT NULL AND lon IS NOT NULL // and
+    // mmsi not in (987357573,987357579,987357559,986737000,983712160,987357529) // helicopters
   GROUP BY
     mmsi
   HAVING
