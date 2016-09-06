@@ -21,10 +21,27 @@ Developing
 
 .. code-block:: console
 
+    $ pip install git+https://github.com/GlobalFishingWatch/bqtools.git
     $ git clone https://github.com/GlobalFishingWatch/treniformis
     $ cd treniformis
     $ pip install -e .\[all\]
     $ py.test --cov treniformis --cov-report term-missing
+    $ # To rerun queries and regenerate lists
+    $ python scripts/update_filter_lists.py 
+
+
+Adding Lists
+------------
+
+New lists should be placed in a directory under `assets` with an appropriate path 
+(probably starting with 'GFW').  A `README.md` file should be included in
+the directory. This provides documentation and also signals the code
+to place the paths in the directory into `available_assets`.  Other than
+the README file, only assets should go in these directores.
+
+If the path needs to be generated using a query. Place the SQL in 
+`scripts/sql` and update `scripts\update_filter_lists.py` to update
+the list.
 
 
 Lists
