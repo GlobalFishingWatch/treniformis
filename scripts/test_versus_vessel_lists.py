@@ -24,7 +24,10 @@ for vl_path, t_path, years in tests:
     for y in years:
         vl_mmsi = set(open(vl_base + vl_path.format(y)).read().strip().split())
         t_mmsi = set(open(t_base + t_path.format(y)).read().strip().split())
-        difference = vl_mmsi.symmetric_difference(t_mmsi)
+        difference = sorted(vl_mmsi.symmetric_difference(t_mmsi))
         if difference:
             print(t_path.format(y), "differs at:")
-            print("    ", difference)
+            if len(difference) < 8:
+                print("    ", difference)
+            else:
+                print("    ", difference[:8], "+", len(difference) - 8, "others")

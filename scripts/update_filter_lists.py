@@ -6,15 +6,6 @@ import os
 import six
 
 
-# TODO:
-# - Move these to issues 
-# - Incorporate READMEs
-# - Rip out code to generate combined lists from mvp
-# - Auto catalog (with readme's) (os.walk)
-# - More docstrings
-
-# Helper functions
-
 def copy_to_sorted_mmsi(source_path, dest_path):
     """
     Drop header (1st row) and sort then dump to dest_path
@@ -68,20 +59,22 @@ def build_combined_fishing_list(base_path, year):
     return sorted(mmsis)
 
 
-# The main code
+
+default_date_ranges = [
+    ("2012-01-01", "2012-12-31"),
+    ("2013-01-01", "2013-12-31"),
+    ("2014-01-01", "2014-12-31"),
+    ("2015-01-01", "2015-12-31"),
+    ("2016-01-01", "2016-08-31")
+]
+
 
 FilterList = namedtuple("FilterList",  ["path", "sql", "date_ranges"])
 
 proj_id = "world-fishing-827"
 gcs_path_template = 'gs://world-fishing-827/scratch/treniformis/temp_{}'
 
-default_date_ranges = [
-    ("2012-01-01", "2013-01-01"),
-    ("2013-01-01", "2014-01-01"),
-    ("2014-01-01", "2015-01-01"),
-    ("2015-01-01", "2016-01-01"),
-    ("2016-01-01", "2016-06-01")
-]
+
 
 filter_lists = [
     FilterList("GFW/ACTIVE_MMSI", "active-mmsis-v1", default_date_ranges),
