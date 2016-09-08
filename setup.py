@@ -54,6 +54,8 @@ with open(os.path.join('treniformis', '__init__.py')) as f:
         elif None not in (version, author, email, source):
             break
 
+with open('VERSION') as f:
+    version = f.read().strip()
 
 with open('README.rst') as f:
     readme = f.read()
