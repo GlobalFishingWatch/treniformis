@@ -16,7 +16,8 @@ def copy_to_sorted_mmsi(source_path, dest_path):
             l = l.strip()
             if i < 1 or not l:
                 continue
-            lines.append(l)      
+            lines.append(l)     
+    lines = sorted(set(lines)) 
     lines.sort()  
     with open(dest_path, "w") as dest:
         dest.write('\n'.join(lines))
