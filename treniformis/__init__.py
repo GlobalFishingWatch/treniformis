@@ -16,7 +16,7 @@ from treniformis._mvp_api import build_combined_fishing_list
 from treniformis._mvp_api import get_annual_list_path
 
 
-__version__ = '0.0.1'
+__version__ = '0.1.0'
 __author__ = 'Global Fishing Watch'
 __email__ = 'info@globalfishingwatch.org'
 __source__ = 'https://github.com/GlobalFishingWatch/treniformis'
