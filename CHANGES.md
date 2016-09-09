@@ -4,7 +4,7 @@ Changes
 Higher level changes affecting the API or data.
 
 
-0.1 - 2016-09-XX
+0.1 - 2016-09-09
 ----------------
 
 * [`#17`](https://github.com/GlobalFishingWatch/treniformis/pull/17)

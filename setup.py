@@ -43,8 +43,6 @@ email = None
 source = None
 with open(os.path.join('treniformis', '__init__.py')) as f:
     for line in f:
-        if line.find('__version__') >= 0:
-            version = _parse_dunder(line)
         elif line.find('__author__') >= 0:
             author = _parse_dunder(line)
         elif line.find('__email__') >= 0:
