@@ -133,6 +133,7 @@ def build_combined_fishing_list(year):
         MMSIs.
     """
 
+    year = int(year)
     if year < 2014:
         known_year = 2014
     else:
