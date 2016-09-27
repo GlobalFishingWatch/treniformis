@@ -1,85 +1,6 @@
 """MVP API
 
-The `build_combined_fishign_list()` function seeks to replace the description
-below, which was copied from the likely fishing dataset's readme.
 
-    Likely Fishing
-    ==============
-
-    Needs a description.
-
-
-    Migration
-    ---------
-
-    Files that were deleted during the migration from `vessel-lists`, but whose
-    content needs to be preserved.
-
-
-    ### make-published.py ###
-
-    ```python
-    # Combine multiple mmsi lists to produce the final known-likely fishing vessel lists
-    # that are used to determine which vessels are treated as fishing vessels
-    known_likely_lists = [
-        {'output': 'known-likely-fishing-mmsis-2012.txt',
-         'include': [
-            '../known-fishing/known-fishing-v1/known-fishing-2014-v1.txt',
-            '../exported/likely-fishing/likely-fishing-v2/likely-fishing-2012-v2.txt'
-         ],
-         'filter': '../exported/active-mmsis/active-mmsis-v1/active-mmsis-2012-v1.txt'
-         },
-
-        {'output': 'known-likely-fishing-mmsis-2013.txt',
-         'include': [
-            '../known-fishing/known-fishing-v1/known-fishing-2014-v1.txt',
-            '../exported/likely-fishing/likely-fishing-v2/likely-fishing-2013-v2.txt'
-         ],
-         'filter': '../exported/active-mmsis/active-mmsis-v1/active-mmsis-2013-v1.txt'
-         },
-
-        {'output': 'known-likely-fishing-mmsis-2014.txt',
-         'include': [
-            '../known-fishing/known-fishing-v1/known-fishing-2014-v1.txt',
-            '../exported/likely-fishing/likely-fishing-v2/likely-fishing-2014-v2.txt'
-         ],
-         'filter': '../exported/active-mmsis/active-mmsis-v1/active-mmsis-2014-v1.txt'
-         },
-
-        {'output': 'known-likely-fishing-mmsis-2015.txt',
-         'include': [
-            '../known-fishing/known-fishing-v1/known-fishing-2015-v1.txt',
-            '../exported/likely-fishing/likely-fishing-v2/likely-fishing-2015-v2.txt'
-         ],
-         'filter': '../exported/active-mmsis/active-mmsis-v1/active-mmsis-2015-v1.txt'
-         },
-
-        {'output': 'known-likely-fishing-mmsis-2016.txt',
-         'include': [
-            '../known-fishing/known-fishing-v1/known-fishing-2015-v1.txt',
-            '../exported/likely-fishing/likely-fishing-v2/likely-fishing-2016-v2.txt'
-         ],
-         'filter': '../exported/active-mmsis/active-mmsis-v1/active-mmsis-2016-v1.txt'
-         },
-    ]
-
-
-    for item in known_likely_lists:
-        mmsis = set()
-
-        for source in item['include']:
-            with open(source, 'r') as f:
-                mmsis |= {mmsi for mmsi in f}
-
-        with open(item['filter']) as f:
-            mmsis &= {mmsi for mmsi in f}
-
-        mmsis = sorted(list(mmsis))
-
-        with open(item['output'], 'w') as outfile:
-            for mmsi in mmsis:
-                outfile.write(mmsi)
-    ```
 """
 
 
@@ -119,41 +40,45 @@ def get_annual_list_path(asset_id):
     return path
 
 
-def build_combined_fishing_list(year):
-    """Build the GFW combined fishing list.
+class AssetClass:
 
-    Parameters
-    ----------
-    year : int
-        Process data for this year.
+    def __init__(self, path, description, item_names):
+        self.description = description
+        self.path = path
+        self.item_names = item_names
+        
+    def __str__(self):
+        paths = ["{0}/{1}".format(self.path, x) for x in self.item_names]
+        available = '\n'.join(paths)
+        return """**{path}**
+        
+Available
+---------
+{available}
 
-    Returns
-    -------
-    set
-        MMSIs.
-    """
+Description
+-----------
+{description}""".format(path=self.path, 
+                                available=available, 
+                                description=self.description)
+                                
+    def __repr__(self):
+        names = "|".join([x.rsplit(".", 1)[0] for x in self.item_names])
+        return "{path}/[{names}]".format(path=self.path, names=names)
 
-    if year < 2014:
-        known_year = 2014
-    else:
-        known_year = year
+        
+    
+def create_asset_descriptions():
+    base = os.path.join(os.path.dirname(__file__), '_assets')
+    assets = {}
+    for root, dirs, files in os.walk(base):
+        if "README.md" in files:
+            with open(os.path.join(root, "README.md")) as f:
+                descr = f.read().strip()
+            names = [x.lstrip(os.sep).rsplit(".", 1)[0] for x in files if x != "README.md"]
+            path = root.rsplit("_assets", 1)[-1].replace(os.sep, "/").lstrip("/")
+            assets[path] = AssetClass(path, descr, names)
+    return assets
 
-    known_fishing_id = 'GFW/FISHING_MMSI/KNOWN/{}'.format(known_year)
-    likely_fishing_id = 'GFW/FISHING_MMSI/LIKELY/{}'.format(year)
-    active_mmsis_id = 'GFW/ACTIVE_MMSI/{}'.format(year)
 
-    known_path = get_annual_list_path(known_fishing_id)
-    likely_path = get_annual_list_path(likely_fishing_id)
-    active_path = get_annual_list_path(active_mmsis_id)
 
-    mmsis = set()
-    for p in known_path, likely_path:
-        with open(p) as f:
-            stripped = six.moves.map(lambda x: x.strip(), f)
-            mmsis |= set(stripped)
-
-    with open(active_path) as f:
-        stripped = six.moves.map(lambda x: x.strip(), f)
-        mmsis &= set(stripped)
-
-    return mmsis
