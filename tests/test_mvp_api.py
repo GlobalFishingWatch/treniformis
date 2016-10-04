@@ -63,3 +63,9 @@ def test_build_combined_fishing_list_clean(year):
     expected = (known_mmsis | likely_mmsis) & active_mmsis
     actual = treniformis.build_combined_fishing_list(year)
     assert actual == expected
+
+
+def test_build_combined_fishing_list_string():
+    # just make sure we get a non-empty result with a string param
+    assert treniformis.build_combined_fishing_list('2013')
+
