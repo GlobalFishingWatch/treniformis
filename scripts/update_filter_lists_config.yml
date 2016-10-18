@@ -1,2 +1,2 @@
-normalize_table_name: pipeline_normalize
-logistic_table_name: pipeline_classify_logistic_661b
+normalize_table_name: pipeline_740__normalize
+classify_table_name: pipeline_740__classify
