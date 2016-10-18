@@ -4,6 +4,15 @@ Changes
 Higher level changes affecting the API or data.
 
 
+0.2 - 2016-10-14
+----------------
+
+* [`#31`](https://github.com/GlobalFishingWatch/treniformis/pull/31)
+  Parameterize table names.
+
+* [`#32`](https://github.com/GlobalFishingWatch/treniformis/pull/33)
+  Change tables referenced to `pipeline_740` and update lists.
+
 0.1 - 2016-09-09
 ----------------
 
