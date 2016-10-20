@@ -51,6 +51,22 @@ def test_is_sorted():
     assert not is_sorted(['10', '0', '1', '2'])
 
 
+def repeated(seq):
+    seen = set()
+    repeated = set()
+    for x in seq:
+        if x in seen:
+            repeated.add(x)
+        else:
+            seen.add(x)
+    return sorted(repeated)
+
+
+def test_repeated():
+    assert not repeated([1, 2, 3, 4])
+    assert repeated([1, 1, 3, 4, 4, 2]) == [1, 4] 
+
+
 @pytest.mark.parametrize("path", _get_mmsi_lists())
 def test_mmsi_list_sorted(path):
     """MMSI lists should remain sorted."""
@@ -63,7 +79,7 @@ def test_mmsi_list_unique(path):
     """MMSI lists should not contain duplicates."""
     with open(path) as f:
         stripped = [l.strip() for l in f]
-        assert len(stripped) == len(set(stripped))
+        assert not repeated(stripped)
 
 def _mmsi_reader(f):
     reader = csv.DictReader(f)
@@ -90,4 +106,4 @@ def test_csv_list_unique(path):
     """CSV lists should not contain duplicate MMSI."""
     with open(path) as f:
         mmsi = list(_mmsi_reader(f))
-        assert len(mmsi) == len(set(mmsi))
+        assert not repeated(mmsi)
