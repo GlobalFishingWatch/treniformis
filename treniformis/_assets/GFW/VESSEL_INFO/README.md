@@ -16,11 +16,13 @@ Fields:
 10. num_gross_tonnage_sources: number of values used to calculate avg and std dev of tonnage
 11. dead_weight: vessel deadweight (tons)
 12. source: where information from vessel was obtained:
-            - CLAV = CLAV registry list (from BQ)
-            - ITU = ITU registry list (from BQ)
-            - ICCAT = ICCAT registry (Dahlhousie students)
-            - WCPFC = Western and Central Pacific Tuna Commision registry
-            - FFA = FFA registry (from BQ)
-            - CCSBT = CCSBT registries (Dahlhousie students)
-            - encounters = vessels identified from encounters, information from MarineTraffic
+
+    - CLAV = CLAV registry list (from BQ)
+    - ITU = ITU registry list (from BQ)
+    - ICCAT = ICCAT registry (Dahlhousie students)
+    - WCPFC = Western and Central Pacific Tuna Commision registry
+    - FFA = FFA registry (from BQ)
+    - CCSBT = CCSBT registries (Dahlhousie students)
+    - encounters = vessels identified from encounters, information from MarineTraffic
+            
 13. flag_state: flag state of vessel (from MID codes)
