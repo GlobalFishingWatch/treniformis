@@ -10,8 +10,21 @@ Higher level changes affecting the API or data.
 * [`#31`](https://github.com/GlobalFishingWatch/treniformis/pull/31)
   Parameterize table names.
 
-* [`#32`](https://github.com/GlobalFishingWatch/treniformis/pull/33)
+* [`#33`](https://github.com/GlobalFishingWatch/treniformis/pull/33)
   Change tables referenced to `pipeline_740` and update lists.
+
+* [`#39`](https://github.com/GlobalFishingWatch/treniformis/pull/39)
+  Add reefers list
+
+* [`#40`](https://github.com/GlobalFishingWatch/treniformis/pull/40)
+  Parameterize dates
+
+* [`#41`](https://github.com/GlobalFishingWatch/treniformis/pull/41)
+  Update date ranges to include dates through October 2016
+
+* [`#43`](https://github.com/GlobalFishingWatch/treniformis/pull/43)
+  Add version info to init
+  
 
 0.1 - 2016-09-09
 ----------------
