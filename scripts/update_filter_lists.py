@@ -61,21 +61,23 @@ def build_combined_fishing_list(base_path, year):
     return sorted(mmsis)
 
 
-
-default_date_ranges = [
-    ("2012-01-01", "2012-12-31"),
-    ("2013-01-01", "2013-12-31"),
-    ("2014-01-01", "2014-12-31"),
-    ("2015-01-01", "2015-12-31"),
-    ("2016-01-01", "2016-08-31")
-]
-
-
 FilterList = namedtuple("FilterList",  ["path", "sql", "date_ranges"])
 
 proj_id = "world-fishing-827"
 gcs_path_template = 'gs://world-fishing-827/scratch/treniformis/temp_{}'
 
+
+this_dir = os.path.dirname(os.path.abspath(__file__))
+top_dir = os.path.abspath(os.path.join(this_dir, ".."))
+asset_dir = os.path.join(top_dir, "treniformis/_assets")
+tmp_path = os.path.join(top_dir, "temp", "temp_bigq_download")
+
+
+config_path = os.path.join(this_dir, "update_filter_lists_config.yml")
+with open(config_path) as f:
+    config = yaml.load(f)
+
+default_date_ranges = config['default_date_ranges']
 
 
 filter_lists = [
@@ -86,14 +88,8 @@ filter_lists = [
     FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015-v1", [("2015-01-01", "2016-01-01")]),
 ]
 
-this_dir = os.path.dirname(os.path.abspath(__file__))
-top_dir = os.path.abspath(os.path.join(this_dir, ".."))
-asset_dir = os.path.join(top_dir, "treniformis/_assets")
-tmp_path = os.path.join(top_dir, "temp", "temp_bigq_download")
 
-config_path = os.path.join(this_dir, "update_filter_lists_config.yml")
-with open(config_path) as f:
-    config = yaml.load(f)
+
 
 
 def update_base_lists():
