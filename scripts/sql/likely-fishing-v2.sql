@@ -1,3 +1,4 @@
+/* version-2 */
 select a.mmsi as mmsi from
 (
   SELECT
