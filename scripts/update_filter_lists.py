@@ -81,9 +81,9 @@ default_date_ranges = config['default_date_ranges']
 
 
 filter_lists = [
-    FilterList("GFW/ACTIVE_MMSI", "active-mmsis-v1", default_date_ranges),
+    FilterList("GFW/ACTIVE_MMSI", "active-mmsis-v2", default_date_ranges),
     FilterList("GFW/SPOOFING_MMSI", "spoofing-mmsis-v3", default_date_ranges),
-    FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing-v2", default_date_ranges),
+    FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing-v3", default_date_ranges),
     FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2014-v1", [("2014-01-01", "2015-01-01")]),
     FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015-v1", [("2015-01-01", "2016-01-01")]),
 ]
