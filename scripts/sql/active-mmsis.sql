@@ -1,4 +1,4 @@
-/* version-1 */
+/* version-2 */
 SELECT
   mmsi
 FROM
@@ -8,8 +8,9 @@ FROM
   FROM (TABLE_DATE_RANGE([{normalize_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
   WHERE
     lat IS NOT NULL AND lon IS NOT NULL
+     and speed > .1 
   GROUP BY
     mmsi
   HAVING
-    c_pos > 1000
+    c_pos > 500
 )
