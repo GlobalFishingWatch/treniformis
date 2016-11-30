@@ -1,4 +1,4 @@
-/* version-2 */
+/* version-3 */
 select a.mmsi as mmsi from
 (
   SELECT
@@ -14,7 +14,7 @@ select a.mmsi as mmsi from
   GROUP EACH BY
     mmsi
   HAVING
-    c_fishing > 10 and fishing_msg_ratio = 1.0
+    c_fishing > 10 and fishing_msg_ratio > .99
 ) a
 JOIN EACH
 (
@@ -24,9 +24,10 @@ JOIN EACH
   WHERE
     lat IS NOT NULL AND lon IS NOT NULL
     and mmsi not in (987357573,987357579,987357559,986737000,983712160,987357529) // helicopters
+    and speed > .1
   GROUP BY
     mmsi
   HAVING
-    c_pos > 1000
+    c_pos > 500
 ) b
 ON a.mmsi = b.mmsi
