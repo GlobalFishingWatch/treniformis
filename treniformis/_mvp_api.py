@@ -88,36 +88,7 @@ import os
 import six
 
 from treniformis import errors
-
-
-def get_annual_list_path(asset_id):
-    """Get a path to an MMSI list, which is probably a text file with a single
-    MMSI per line.
-
-    This is an MVP API that will almost certainly be deprecated at some point.
-    Do not construct file paths directly.
-
-    Parameters
-    ----------
-    asset_id : str
-        Like ``GFW/WKV/KNOWN_FISHING/2014``.
-
-    Returns
-    -------
-    str
-        File path.
-    """
-
-    asset_path = os.path.join(*asset_id.rstrip('/').split('/'))
-    path = os.path.join(
-        os.path.dirname(__file__), '_assets', '{}.txt'.format(asset_path))
-
-    if not os.path.exists(path) or not os.path.isfile(path):
-        raise errors.TreniformisIOError(
-            "Invalid asset ID: {}".format(asset_id))
-
-    return path
-
+from pkg_resources import resource_stream
 
 def build_combined_fishing_list(year):
     """Build the GFW combined fishing list.
@@ -139,21 +110,17 @@ def build_combined_fishing_list(year):
     else:
         known_year = year
 
-    known_fishing_id = 'GFW/FISHING_MMSI/KNOWN/{}'.format(known_year)
-    likely_fishing_id = 'GFW/FISHING_MMSI/LIKELY/{}'.format(year)
-    active_mmsis_id = 'GFW/ACTIVE_MMSI/{}'.format(year)
-
-    known_path = get_annual_list_path(known_fishing_id)
-    likely_path = get_annual_list_path(likely_fishing_id)
-    active_path = get_annual_list_path(active_mmsis_id)
+    known_fishing_id = '_assets/GFW/FISHING_MMSI/KNOWN/{}.txt'.format(known_year)
+    likely_fishing_id = '_assets/GFW/FISHING_MMSI/LIKELY/{}.txt'.format(year)
+    active_mmsis_id = '_assets/GFW/ACTIVE_MMSI/{}.txt'.format(year)
 
     mmsis = set()
-    for p in known_path, likely_path:
-        with open(p) as f:
+    for p in known_fishing_id, likely_fishing_id:
+        with resource_stream("treniformis", p) as f:
             stripped = six.moves.map(lambda x: x.strip(), f)
             mmsis |= set(stripped)
 
-    with open(active_path) as f:
+    with resource_stream("treniformis", active_mmsis_id) as f:
         stripped = six.moves.map(lambda x: x.strip(), f)
         mmsis &= set(stripped)
 
