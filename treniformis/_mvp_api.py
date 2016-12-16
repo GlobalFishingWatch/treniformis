@@ -90,6 +90,10 @@ import six
 from treniformis import errors
 from pkg_resources import resource_stream
 
+def get_annual_list(p):
+    return resource_stream("treniformis", '_assets/' + p + '.txt')
+
+
 def build_combined_fishing_list(year):
     """Build the GFW combined fishing list.
 
@@ -110,17 +114,17 @@ def build_combined_fishing_list(year):
     else:
         known_year = year
 
-    known_fishing_id = '_assets/GFW/FISHING_MMSI/KNOWN/{}.txt'.format(known_year)
-    likely_fishing_id = '_assets/GFW/FISHING_MMSI/LIKELY/{}.txt'.format(year)
-    active_mmsis_id = '_assets/GFW/ACTIVE_MMSI/{}.txt'.format(year)
+    known_fishing_id = 'GFW/FISHING_MMSI/KNOWN/{}'.format(known_year)
+    likely_fishing_id = 'GFW/FISHING_MMSI/LIKELY/{}'.format(year)
+    active_mmsis_id = 'GFW/ACTIVE_MMSI/{}'.format(year)
 
     mmsis = set()
     for p in known_fishing_id, likely_fishing_id:
-        with resource_stream("treniformis", p) as f:
+        with get_annual_list(p) as f:
             stripped = six.moves.map(lambda x: x.strip(), f)
             mmsis |= set(stripped)
 
-    with resource_stream("treniformis", active_mmsis_id) as f:
+    with get_annual_list(active_mmsis_id) as f:
         stripped = six.moves.map(lambda x: x.strip(), f)
         mmsis &= set(stripped)
 
