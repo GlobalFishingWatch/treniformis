@@ -5,7 +5,9 @@ import treniformis
 import os
 import six
 import yaml
-
+from utility import this_dir
+from utility import top_dir
+from utility import asset_dir
 
 def copy_to_sorted_mmsi(source_path, dest_path):
     """
@@ -67,9 +69,6 @@ proj_id = "world-fishing-827"
 gcs_path_template = 'gs://world-fishing-827/scratch/treniformis/temp_{}'
 
 
-this_dir = os.path.dirname(os.path.abspath(__file__))
-top_dir = os.path.abspath(os.path.join(this_dir, ".."))
-asset_dir = os.path.join(top_dir, "treniformis/_assets")
 tmp_path = os.path.join(top_dir, "temp", "temp_bigq_download")
 
 
