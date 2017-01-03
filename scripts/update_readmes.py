@@ -42,7 +42,7 @@ def update_readmes(top, doc):
                 readme = f.read()
         else:
             readme = None
-        appendices.append(Appendix(link, name, readme))
+        appendices.append(Appendix(link, relpath, readme))
 
     doc.append('')
     doc.append('---------')

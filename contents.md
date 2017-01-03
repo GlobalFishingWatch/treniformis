@@ -44,7 +44,7 @@
 ---------
 ## READMEs
 
-### ACTIVE_MMSI [[toc]](#contents)
+### GFW/ACTIVE_MMSI [[toc]](#contents)
 
 #### Active MMSIs
 
@@ -53,7 +53,7 @@ MMSIs with a minimum number of positional reports are included.
 
 --------
 
-### KNOWN [[toc]](#contents)
+### GFW/FISHING_MMSI/KNOWN [[toc]](#contents)
 
 #### Known Fishing Vessels Version 1
 
@@ -62,7 +62,7 @@ public registries.
 
 --------
 
-### LIKELY [[toc]](#contents)
+### GFW/FISHING_MMSI/LIKELY [[toc]](#contents)
 
 #### Likely Fishing MMSIs version 2
 
@@ -102,7 +102,7 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
 
 --------
 
-### SPOOFING_MMSI [[toc]](#contents)
+### GFW/SPOOFING_MMSI [[toc]](#contents)
 
 #### Spoofing MMSI Version 3
 
@@ -120,7 +120,7 @@ active time, then we know that some of the segments must overlap, and this is th
 
 --------
 
-### VESSEL_INFO [[toc]](#contents)
+### GFW/VESSEL_INFO [[toc]](#contents)
 
 #### REEFERS.csv
 
