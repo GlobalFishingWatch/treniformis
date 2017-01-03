@@ -30,7 +30,7 @@ def update_readmes(top, doc):
         level = relpath.count('/')
         indent = '    ' * level
         if readmes:
-            doc.append('{indent}* [{name}]({link})'.format(indent=indent, name=name, link=link))
+            doc.append('{indent}* [{name}](#{link})'.format(indent=indent, name=name, link=link))
         else:
             doc.append('{indent}* {name}'.format(indent=indent, name=name))
         for dfile in data_files:

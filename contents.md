@@ -3,7 +3,7 @@
 ## Contents
 </a>
 * GFW
-    * [ACTIVE_MMSI](link-1)
+    * [ACTIVE_MMSI](#link-1)
         - 2012
         - 2013
         - 2014
@@ -17,7 +17,7 @@
         - 2016
         - ALL_YEARS
     * FISHING_MMSI
-        * [KNOWN](link-4)
+        * [KNOWN](#link-4)
             - 2014
             - 2015
         * KNOWN_AND_LIKELY
@@ -26,19 +26,19 @@
             - 2014
             - 2015
             - 2016
-        * [LIKELY](link-6)
+        * [LIKELY](#link-6)
             - 2012
             - 2013
             - 2014
             - 2015
             - 2016
-    * [SPOOFING_MMSI](link-7)
+    * [SPOOFING_MMSI](#link-7)
         - 2012
         - 2013
         - 2014
         - 2015
         - 2016
-    * [VESSEL_INFO](link-8)
+    * [VESSEL_INFO](#link-8)
         - REEFERS
 
 ---------
