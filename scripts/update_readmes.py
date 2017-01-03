@@ -5,7 +5,6 @@ from utility import asset_dir
 from utility import top_dir
 from collections import OrderedDict
 from collections import namedtuple
-import yattag
 
 Appendix = namedtuple('Appendix', ['link', 'name', 'content'])
 
@@ -15,9 +14,10 @@ def update_readmes(top, doc):
     appendices = []
     base = os.path.dirname(top)
     last_level = -1
-    doc.line('h1', 'Treniformis')
-    with doc.tag('a', name='contents'):
-        doc.line('h2', 'Contents')
+    doc.append('# Treniformis')
+    doc.append('<a name="contents">')
+    doc.append('## Contents')
+    doc.append('</a>')
     for linkno, (root, dirs, files) in enumerate(os.walk(top)):
         dirs[:] = sorted(x for x in dirs if not x.startswith('.'))
         data_files = sorted(x for x in files if not (x.startswith('.') or x.lower().startswith('readme')))
@@ -28,20 +28,14 @@ def update_readmes(top, doc):
         relpath = os.path.relpath(root, base)
         name = os.path.basename(root)
         level = relpath.count('/')
-        if level > last_level:
-            doc.asis('<ul>')
-        if level < last_level:
-            doc.asis('</ul>')
-        last_level = level
-        with doc.tag('li'):
-            if readmes:
-                doc.line('a', name, href='#'+link)
-            else:
-                doc.text(name)
-        with doc.tag('ul'):
-            for dfile in data_files:
-                dname = os.path.splitext(dfile)[0]
-                doc.line('li', dname)
+        indent = '    ' * level
+        if readmes:
+            doc.append('{indent}* [{name}]({link})'.format(indent=indent, name=name, link=link))
+        else:
+            doc.append('{indent}* {name}'.format(indent=indent, name=name))
+        for dfile in data_files:
+            dname = os.path.splitext(dfile)[0]
+            doc.append('{indent}    - {dname}'.format(indent=indent, dname=dname))
         if readmes:
             readme_path = os.path.join(root, readmes[0])
             with open(readme_path) as f:
@@ -50,26 +44,29 @@ def update_readmes(top, doc):
             readme = None
         appendices.append(Appendix(link, name, readme))
 
-    for i in range(last_level):
-        doc.asis('</ul>')
-
-    doc.line('h2', 'READMEs')    
+    doc.append('')
+    doc.append('---------')
+    doc.append('## READMEs')    
 
     for apdx in appendices:
-        # TODO, pull in text from README
         if apdx.content:
-            with doc.tag('a', name=apdx.link):
-                with doc.tag('h3'):
-                    doc.text(apdx.name + ' ')
-                    doc.line('a', '[toc]', href='#contents')
-                doc.line('pre', apdx.content)
+            doc.append('')
+            doc.append('### {} [[toc]](#contents)'.format(apdx.name))
+            doc.append('')
+            for line in apdx.content.strip().split('\n'):
+                if line.startswith('#'):
+                    line = '###' + line
+                doc.append(line)
 
+            doc.append('')
+            doc.append('--------')
+    doc = doc[:-1] # remove final hrule
 
 
 if __name__ == '__main__':
     top = os.path.join(asset_dir, "GFW")
-    doc = yattag.Doc()
+    doc = []
     update_readmes(top, doc)
-    result = yattag.indent(doc.getvalue())
-    with open(os.path.join(top_dir, "contents.html"), 'w') as f:
+    result = '\n'.join(doc)
+    with open(os.path.join(top_dir, "contents.md"), 'w') as f:
         f.write(result)
