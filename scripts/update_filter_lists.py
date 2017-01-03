@@ -84,8 +84,8 @@ filter_lists = [
     FilterList("GFW/ACTIVE_MMSI", "active-mmsis", default_date_ranges),
     FilterList("GFW/SPOOFING_MMSI", "spoofing-mmsis", default_date_ranges),
     FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing", default_date_ranges),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2014", [("2014-01-01", "2015-01-01")]),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015", [("2015-01-01", "2016-01-01")]),
+    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2014", [("2014-01-01", "2014-12-31")]),
+    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015", [("2015-01-01", "2015-12-31")]),
 ]
 
 
