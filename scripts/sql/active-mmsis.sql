@@ -1,4 +1,14 @@
-/* version-2 */
+/* 
+
+# Active MMSI
+
+*Version: 2* 
+
+MMSIs of vessels which are broadcasting during the specified period.  Only
+MMSIs with a minimum number of positional reports are included.
+
+## Query:
+*/
 SELECT
   mmsi
 FROM

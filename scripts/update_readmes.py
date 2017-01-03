@@ -1,17 +1,32 @@
 from __future__ import print_function
 import os
 from glob import glob
+from collections import namedtuple
+from sql_to_readme import sql_to_readme
 from utility import asset_dir
 from utility import top_dir
-from collections import OrderedDict
-from collections import namedtuple
+from utility import this_dir
+from utility import filter_lists
+
 
 Appendix = namedtuple('Appendix', ['link', 'name', 'content'])
 
+def update_local_readmes():
+    for fl in filter_lists:
+        sql_path = os.path.join(this_dir, "sql", "{}.sql".format(fl.sql))
+        sql = open(sql_path).read()
+        # Create a readme file based on the query
+        readme_txt = sql_to_readme(sql)
+        readme_path = os.path.join(asset_dir, fl.path, 'README.md')
+        with open(readme_path, 'w') as f:
+            f.write(readme_txt)
 
-def update_readmes(top, doc):
 
+def update_joint_readme():
+    top = os.path.join(asset_dir, "GFW")
+    doc = []
     appendices = []
+
     base = os.path.dirname(top)
     last_level = -1
     doc.append('# Treniformis')
@@ -63,11 +78,16 @@ def update_readmes(top, doc):
             doc.append('--------')
     doc = doc[:-1] # remove final hrule
 
-
-if __name__ == '__main__':
-    top = os.path.join(asset_dir, "GFW")
-    doc = []
-    update_readmes(top, doc)
     result = '\n'.join(doc)
     with open(os.path.join(top_dir, "contents.md"), 'w') as f:
         f.write(result)
+
+
+def update_readmes():
+    update_local_readmes()
+    update_joint_readme()
+
+
+if __name__ == '__main__':
+    update_readmes()
+
