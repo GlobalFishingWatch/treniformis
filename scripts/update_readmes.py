@@ -51,6 +51,7 @@ def update_readmes(top, doc):
     for apdx in appendices:
         if apdx.content:
             doc.append('')
+            doc.append('<a name="{link}"></a>'.format(link=apdx.link))
             doc.append('### {} [[toc]](#contents)'.format(apdx.name))
             doc.append('')
             for line in apdx.content.strip().split('\n'):
