@@ -20,7 +20,7 @@
         * [KNOWN](#link-4)
             - 2014
             - 2015
-        * KNOWN_AND_LIKELY
+        * [KNOWN_AND_LIKELY](#link-5)
             - 2012
             - 2013
             - 2014
@@ -145,6 +145,17 @@ version-1
         and RIGHT(STRING(mmsi), 6) != '000000' //likely spoofing
     ORDER BY
       mmsi ASC
+
+--------
+
+<a name="link-5"></a>
+### GFW/FISHING_MMSI/KNOWN_AND_LIKELY [[toc]](#contents)
+
+#### Known and Likely
+
+All ACTIVE vessels that are in the KNOWN or LIKELY fishing lists for a given 
+year.  That is, ACTIVE & (KNOWN | LIKELY). For years before 2014, the 2014
+KNOWN list is used.
 
 --------
 
