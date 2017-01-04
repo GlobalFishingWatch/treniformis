@@ -8,7 +8,7 @@ select a.mmsi as mmsi from
     sum (shiptype_text = 'Fishing') / count(*) fishing_msg_ratio
   FROM (TABLE_DATE_RANGE([{normalize_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
   WHERE
-    type in (5, 24)
+    type in (5, 19, 24)
     and shiptype_text is not null
     and shiptype_text != 'Not available'
   GROUP EACH BY

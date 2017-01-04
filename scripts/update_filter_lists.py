@@ -84,8 +84,8 @@ filter_lists = [
     FilterList("GFW/ACTIVE_MMSI", "active-mmsis", default_date_ranges),
     FilterList("GFW/SPOOFING_MMSI", "spoofing-mmsis", default_date_ranges),
     FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing", default_date_ranges),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2014", [("2014-01-01", "2015-01-01")]),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015", [("2015-01-01", "2016-01-01")]),
+    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2014", [("2014-01-01", "2014-12-31")]),
+    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015", [("2015-01-01", "2015-12-31")]),
 ]
 
 
@@ -106,7 +106,7 @@ def update_base_lists():
         # run all ranges in parallel to speed things up
         for date_range in fl.date_ranges:
             start_date, end_date = date_range
-            year = start_date[:4]
+            year = end_date[:4]
             query = sql.format(start_date=start_date, end_date=end_date, **config)
             gcs_path = gcs_path_template.format(len(path_map))
             path_map[gcs_path] = (fl.path, year)
@@ -137,7 +137,7 @@ def update_derived_lists():
     print("Updating", path)
     for date_range in default_date_ranges:
             start_date, end_date = date_range
-            year = start_date[:4]
+            year = end_date[:4]
             print(year)
             combined = build_combined_fishing_list(asset_dir, year)
             dest_path = os.path.join(asset_dir, path, "{}.txt".format(year))
