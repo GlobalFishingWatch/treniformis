@@ -4,6 +4,20 @@ Changes
 Higher level changes affecting the API or data.
 
 
+0.3 - 2017-01-04
+----------------
+
+# [`#47`]((https://github.com/GlobalFishingWatch/treniformis/pull/47)
+  Move SQL version numbers into the SQL files as comments
+
+# [`#48`]((https://github.com/GlobalFishingWatch/treniformis/pull/48)
+  Add vessels with more than 500 points per year.
+
+# [`#53`]((https://github.com/GlobalFishingWatch/treniformis/pull/53)
+  Add type 19 messages to active vessels query; update dates and include 2017
+  as a 12 month window.
+
+
 0.2 - 2016-10-14
 ----------------
 
