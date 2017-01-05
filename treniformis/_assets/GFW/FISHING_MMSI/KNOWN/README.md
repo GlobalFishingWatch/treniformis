@@ -1,7 +1,12 @@
 
 [comment]: # (DO NOT EDIT; GENERATED FILE)
 
-query-version: 1
+# Known Fishing Vessels
+
+*query-version: 1* 
+
+List of MMSIs that are known to be fishing vessels based on the presence of the MMSI on one or more 
+public registries.
     
     SELECT
       mmsi
