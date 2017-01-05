@@ -1,11 +1,14 @@
 from __future__ import print_function
-from collections import namedtuple
 import bqtools
 import treniformis
 import os
 import six
-import yaml
-
+from utility import this_dir
+from utility import top_dir
+from utility import asset_dir
+from utility import default_date_ranges
+from utility import filter_lists
+from utility import config
 
 def copy_to_sorted_mmsi(source_path, dest_path):
     """
@@ -61,35 +64,10 @@ def build_combined_fishing_list(base_path, year):
     return sorted(mmsis)
 
 
-FilterList = namedtuple("FilterList",  ["path", "sql", "date_ranges"])
-
 proj_id = "world-fishing-827"
 gcs_path_template = 'gs://world-fishing-827/scratch/treniformis/temp_{}'
 
-
-this_dir = os.path.dirname(os.path.abspath(__file__))
-top_dir = os.path.abspath(os.path.join(this_dir, ".."))
-asset_dir = os.path.join(top_dir, "treniformis/_assets")
 tmp_path = os.path.join(top_dir, "temp", "temp_bigq_download")
-
-
-config_path = os.path.join(this_dir, "update_filter_lists_config.yml")
-with open(config_path) as f:
-    config = yaml.load(f)
-
-default_date_ranges = config['default_date_ranges']
-
-
-filter_lists = [
-    FilterList("GFW/ACTIVE_MMSI", "active-mmsis", default_date_ranges),
-    FilterList("GFW/SPOOFING_MMSI", "spoofing-mmsis", default_date_ranges),
-    FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing", default_date_ranges),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2014", [("2014-01-01", "2014-12-31")]),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015", [("2015-01-01", "2015-12-31")]),
-]
-
-
-
 
 
 def update_base_lists():
