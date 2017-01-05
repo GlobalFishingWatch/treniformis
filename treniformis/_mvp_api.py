@@ -91,8 +91,10 @@ from treniformis import errors
 from pkg_resources import resource_stream
 
 def get_annual_list(p):
-    return resource_stream("treniformis", '_assets/' + p + '.txt')
-
+    try:
+        return resource_stream("treniformis", '_assets/' + p + '.txt')
+    except IOError:
+        raise errors.TreniformisIOError(p)
 
 def build_combined_fishing_list(year):
     """Build the GFW combined fishing list.
