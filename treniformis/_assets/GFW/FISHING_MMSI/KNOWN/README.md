@@ -1,7 +1,7 @@
 
 [comment]: # (DO NOT EDIT; GENERATED FILE)
 
-version-1
+query-version: 1
     
     SELECT
       mmsi

@@ -3,7 +3,7 @@
 
 # Likely Fishing MMSIs 
 
-*Version: 3*
+*query-version: 3*
 
 MMSIs of vessels which declare the vessel type to be 'Fishing' in type 5 or 24 
 

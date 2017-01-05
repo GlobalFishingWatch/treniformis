@@ -51,7 +51,7 @@
 
 #### Active MMSI
 
-*Version: 2* 
+*query-version: 2* 
 
 MMSIs of vessels which are broadcasting during the specified period.  Only
 MMSIs with a minimum number of positional reports are included.
@@ -81,7 +81,7 @@ MMSIs with a minimum number of positional reports are included.
 
 [comment]: # (DO NOT EDIT; GENERATED FILE)
 
-version-1
+query-version: 1
     
     SELECT
       mmsi
@@ -159,7 +159,7 @@ version-1
 
 #### Likely Fishing MMSIs 
 
-*Version: 3*
+*query-version: 3*
 
 MMSIs of vessels which declare the vessel type to be 'Fishing' in type 5 or 24 
 
@@ -239,7 +239,7 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
 
 #### Spoofing MMSI 
 
-*Version: 3*
+*query-version: 3*
 
 List of MMSIs that experience substantial ID spoofing
 

@@ -1,4 +1,4 @@
-/* version-1 */
+/* query-version: 1 */
 SELECT
   mmsi
 FROM (

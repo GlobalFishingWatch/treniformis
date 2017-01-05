@@ -3,7 +3,7 @@
 
 # Spoofing MMSI 
 
-*Version: 3*
+*query-version: 3*
 
 List of MMSIs that experience substantial ID spoofing
 
