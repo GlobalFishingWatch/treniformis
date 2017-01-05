@@ -1,3 +1,6 @@
+
+[comment]: # (DO NOT EDIT; GENERATED FILE)
+
 version-1
     
     SELECT

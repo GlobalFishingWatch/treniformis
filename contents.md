@@ -1,3 +1,6 @@
+
+[comment]: # (DO NOT EDIT; GENERATED FILE)
+
 # Treniformis
 <a name="contents">
 ## Contents
@@ -44,6 +47,8 @@
 <a name="link-1"></a>
 ### GFW/ACTIVE_MMSI [[toc]](#contents)
 
+[comment]: # (DO NOT EDIT; GENERATED FILE)
+
 #### Active MMSI
 
 *Version: 2* 
@@ -73,6 +78,8 @@ MMSIs with a minimum number of positional reports are included.
 
 <a name="link-3"></a>
 ### GFW/FISHING_MMSI/KNOWN [[toc]](#contents)
+
+[comment]: # (DO NOT EDIT; GENERATED FILE)
 
 version-1
     
@@ -147,6 +154,8 @@ version-1
 
 <a name="link-5"></a>
 ### GFW/FISHING_MMSI/LIKELY [[toc]](#contents)
+
+[comment]: # (DO NOT EDIT; GENERATED FILE)
 
 #### Likely Fishing MMSIs 
 
@@ -225,6 +234,8 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
 
 <a name="link-6"></a>
 ### GFW/SPOOFING_MMSI [[toc]](#contents)
+
+[comment]: # (DO NOT EDIT; GENERATED FILE)
 
 #### Spoofing MMSI 
 

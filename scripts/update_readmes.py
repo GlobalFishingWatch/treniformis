@@ -19,6 +19,7 @@ def update_local_readmes():
         readme_txt = sql_to_readme(sql)
         readme_path = os.path.join(asset_dir, fl.path, 'README.md')
         with open(readme_path, 'w') as f:
+            f.write('\n[comment]: # (DO NOT EDIT; GENERATED FILE)\n\n')
             f.write(readme_txt)
 
 
@@ -29,6 +30,7 @@ def update_joint_readme():
 
     base = os.path.dirname(top)
     last_level = -1
+    doc.append('\n[comment]: # (DO NOT EDIT; GENERATED FILE)\n')
     doc.append('# Treniformis')
     doc.append('<a name="contents">')
     doc.append('## Contents')

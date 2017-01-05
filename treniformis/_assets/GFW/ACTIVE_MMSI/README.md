@@ -1,3 +1,6 @@
+
+[comment]: # (DO NOT EDIT; GENERATED FILE)
+
 # Active MMSI
 
 *Version: 2* 
