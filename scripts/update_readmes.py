@@ -81,7 +81,7 @@ def update_joint_readme():
     doc = doc[:-1] # remove final hrule
 
     result = '\n'.join(doc)
-    with open(os.path.join(top_dir, "contents.md"), 'w') as f:
+    with open(os.path.join(top_dir, "CONTENTS.md"), 'w') as f:
         f.write(result)
 
 
