@@ -1,11 +1,14 @@
 from __future__ import print_function
-from collections import namedtuple
 import bqtools
 import treniformis
 import os
 import six
-import yaml
-
+from utility import this_dir
+from utility import top_dir
+from utility import asset_dir
+from utility import default_date_ranges
+from utility import filter_lists
+from utility import config
 
 def copy_to_sorted_mmsi(source_path, dest_path):
     """
@@ -61,35 +64,10 @@ def build_combined_fishing_list(base_path, year):
     return sorted(mmsis)
 
 
-FilterList = namedtuple("FilterList",  ["path", "sql", "date_ranges"])
-
 proj_id = "world-fishing-827"
 gcs_path_template = 'gs://world-fishing-827/scratch/treniformis/temp_{}'
 
-
-this_dir = os.path.dirname(os.path.abspath(__file__))
-top_dir = os.path.abspath(os.path.join(this_dir, ".."))
-asset_dir = os.path.join(top_dir, "treniformis/_assets")
 tmp_path = os.path.join(top_dir, "temp", "temp_bigq_download")
-
-
-config_path = os.path.join(this_dir, "update_filter_lists_config.yml")
-with open(config_path) as f:
-    config = yaml.load(f)
-
-default_date_ranges = config['default_date_ranges']
-
-
-filter_lists = [
-    FilterList("GFW/ACTIVE_MMSI", "active-mmsis", default_date_ranges),
-    FilterList("GFW/SPOOFING_MMSI", "spoofing-mmsis", default_date_ranges),
-    FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing", default_date_ranges),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2014", [("2014-01-01", "2015-01-01")]),
-    FilterList("GFW/FISHING_MMSI/KNOWN", "known-fishing-2015", [("2015-01-01", "2016-01-01")]),
-]
-
-
-
 
 
 def update_base_lists():
@@ -106,7 +84,7 @@ def update_base_lists():
         # run all ranges in parallel to speed things up
         for date_range in fl.date_ranges:
             start_date, end_date = date_range
-            year = start_date[:4]
+            year = end_date[:4]
             query = sql.format(start_date=start_date, end_date=end_date, **config)
             gcs_path = gcs_path_template.format(len(path_map))
             path_map[gcs_path] = (fl.path, year)
@@ -137,7 +115,7 @@ def update_derived_lists():
     print("Updating", path)
     for date_range in default_date_ranges:
             start_date, end_date = date_range
-            year = start_date[:4]
+            year = end_date[:4]
             print(year)
             combined = build_combined_fishing_list(asset_dir, year)
             dest_path = os.path.join(asset_dir, path, "{}.txt".format(year))
