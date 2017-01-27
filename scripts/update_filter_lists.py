@@ -3,6 +3,7 @@ import bqtools
 import treniformis
 import os
 import six
+import csv
 from utility import this_dir
 from utility import top_dir
 from utility import asset_dir
@@ -107,9 +108,35 @@ def update_base_lists():
     os.unlink(tmp_path)
         
         
+
+non_fishing_classes = {  'cargo',
+                         'motor_passenger',
+                         'other_not_fishing',
+                         'passenger',
+                         'reefer',
+                         'sailing',
+                         'seismic_vessel',
+                         'tanker',
+                         'tug'}
+
 def update_derived_lists():
     """Update lists created from base lists
     """
+    # Update KNOWN_NONFISHING list, store KNOWN_NONFISHING for later
+    infopath = "GFW/VESSEL_INFO/CONSOLIDATED_LISTS.csv"
+    path = "GFW/NONFISHING_MMSI/KNOWN"
+    known_nonfishing = set()
+    print("Updating", path)
+    with open(os.path.join(asset_dir, infopath)) as fin:
+        with open(os.path.join(asset_dir, path, "ALL_YEARS.txt"), 'w') as fout:
+            reader = csv.DictReader(fin)
+            for row in reader:
+                if row['label'] in non_fishing_classes:
+                    mmsi = row['mmsi'].strip()
+                    fout.write(mmsi + '\n')
+                    known_nonfishing.add(mmsi)
+
+
     # Update combined fishing list
     path = "GFW/FISHING_MMSI/KNOWN_AND_LIKELY"
     print("Updating", path)
@@ -120,8 +147,13 @@ def update_derived_lists():
             combined = build_combined_fishing_list(asset_dir, year)
             dest_path = os.path.join(asset_dir, path, "{}.txt".format(year))
             with open(dest_path, "w") as dest:
-                dest.write('\n'.join(combined))
+                for mmsi in combined:
+                    if mmsi not in known_nonfishing:
+                        dest.write(mmsi + '\n')
+
+
     
+
 
 
 if __name__ == "__main__":
