@@ -17,7 +17,7 @@ YEARS = (2012, 2013, 2014, 2015, 2016)
 
 @pytest.mark.parametrize("asset_id",
     ['GFW/ACTIVE_MMSI/{}'.format(y) for y in YEARS] +
-    ['GFW/FISHING_MMSI/KNOWN/{}'.format(y) for y in (2014, 2015)] +
+    ['GFW/FISHING_MMSI/KNOWN/ALL_YEARS'] +
     ['GFW/FISHING_MMSI/LIKELY/{}'.format(y) for y in YEARS] +
     ['GFW/SPOOFING_MMSI/{}'.format(y) for y in YEARS]
 )
@@ -39,10 +39,8 @@ def test_build_combined_fishing_list_clean(year):
     Instead we always use the 2014 known list and merge with the actual years
     for everything else."""
 
-    if year < 2014:
-        known_year = 2014
-    else:
-        known_year = year
+
+    known_year = "ALL_YEARS"
 
     with treniformis.get_annual_list(
         'GFW/FISHING_MMSI/KNOWN/{}'.format(known_year)) as f:
