@@ -1,0 +1,1 @@
+Known fishing vessels derived from GFW/VESSEL_INFO/CONSOLIDATED_LISTS.csv.
