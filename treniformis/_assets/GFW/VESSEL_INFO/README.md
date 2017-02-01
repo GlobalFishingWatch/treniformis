@@ -1,4 +1,20 @@
 
+CONSOLIDATED_LISTS.csv
+======================
+
+Derived from a combination of various registry lists. Combining
+code currently lives in `mussidae`.
+
+Fields:
+
+1. mmsi: MMSI
+2. label: type of vessel
+3. length: meters
+4. engine_power: kilowatts
+5: tonnage: gross metric tons
+6. split: 'Training' | 'Test' (for CNN classifier)
+
+
 REEFERS.csv
 ===========
 

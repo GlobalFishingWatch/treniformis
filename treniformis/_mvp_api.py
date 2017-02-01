@@ -111,10 +111,7 @@ def build_combined_fishing_list(year):
     """
 
     year = int(year)
-    if year < 2014:
-        known_year = 2014
-    else:
-        known_year = year
+    known_year = "ALL_YEARS"
 
     known_fishing_id = 'GFW/FISHING_MMSI/KNOWN/{}'.format(known_year)
     likely_fishing_id = 'GFW/FISHING_MMSI/LIKELY/{}'.format(year)

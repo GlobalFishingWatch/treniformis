@@ -3,6 +3,7 @@ import bqtools
 import treniformis
 import os
 import six
+import csv
 from utility import this_dir
 from utility import top_dir
 from utility import asset_dir
@@ -41,21 +42,21 @@ def build_combined_fishing_list(base_path, year):
         sorted MMSIs.
     """
 
-    known_year = year = int(year)
-    if year < 2014:
-        known_year = 2014
-    elif year > 2015:
-        known_year = 2015
         
-    known_path = 'GFW/FISHING_MMSI/KNOWN/{}.txt'.format(known_year)
+    known_fishing_path = 'GFW/FISHING_MMSI/KNOWN/ALL_YEARS.txt'
+    known_nonfishing_path = 'GFW/FISHING_MMSI/KNOWN/ALL_YEARS.txt'
     likely_path = 'GFW/FISHING_MMSI/LIKELY/{}.txt'.format(year)
     active_path = 'GFW/ACTIVE_MMSI/{}.txt'.format(year)
 
     mmsis = set()
-    for p in known_path, likely_path:
+    for p in known_fishing_path, likely_path:
         with open(os.path.join(base_path, p)) as f:
             stripped = six.moves.map(lambda x: x.strip(), f)
             mmsis |= set(stripped)
+
+    with open(os.path.join(base_path, known_nonfishing_path)) as f:
+        stripped = six.moves.map(lambda x: x.strip(), f)
+        mmsis -= set(stripped)      
 
     with open(os.path.join(base_path, active_path)) as f:
         stripped = six.moves.map(lambda x: x.strip(), f)
@@ -106,10 +107,59 @@ def update_base_lists():
         print("    {0}/{1} done".format(fl_path, year))
     os.unlink(tmp_path)
         
-        
+# TODO: should pull from same source as mussidae   
+fishing_classes = {  'drifting_longlines',
+                     'other_fishing',
+                     'pole_and_line',
+                     'pots_and_traps',
+                     'purse_seines',
+                     'set_gillnets',
+                     'set_longlines',
+                     'squid_jigger',
+                     'trawlers',
+                     'trollers',
+                     'unknown_longline'}
+
+
+non_fishing_classes = {  'cargo',
+                         'motor_passenger',
+                         'other_not_fishing',
+                         'passenger',
+                         'reefer',
+                         'sailing',
+                         'seismic_vessel',
+                         'tanker',
+                         'tug'}
+
 def update_derived_lists():
     """Update lists created from base lists
     """
+    # Update KNOWN_FISHING list
+    infopath = "GFW/VESSEL_INFO/CONSOLIDATED_LISTS.csv"
+    path = "GFW/FISHING_MMSI/KNOWN"
+    print("Updating", path)
+    with open(os.path.join(asset_dir, infopath)) as fin:
+        with open(os.path.join(asset_dir, path, "ALL_YEARS.txt"), 'w') as fout:
+            reader = csv.DictReader(fin)
+            for row in reader:
+                if row['label'] in fishing_classes:
+                    mmsi = row['mmsi'].strip()
+                    fout.write(mmsi + '\n')
+
+
+    # Update KNOWN_NONFISHING list
+    infopath = "GFW/VESSEL_INFO/CONSOLIDATED_LISTS.csv"
+    path = "GFW/NONFISHING_MMSI/KNOWN"
+    print("Updating", path)
+    with open(os.path.join(asset_dir, infopath)) as fin:
+        with open(os.path.join(asset_dir, path, "ALL_YEARS.txt"), 'w') as fout:
+            reader = csv.DictReader(fin)
+            for row in reader:
+                if row['label'] in non_fishing_classes:
+                    mmsi = row['mmsi'].strip()
+                    fout.write(mmsi + '\n')
+
+
     # Update combined fishing list
     path = "GFW/FISHING_MMSI/KNOWN_AND_LIKELY"
     print("Updating", path)
@@ -120,8 +170,12 @@ def update_derived_lists():
             combined = build_combined_fishing_list(asset_dir, year)
             dest_path = os.path.join(asset_dir, path, "{}.txt".format(year))
             with open(dest_path, "w") as dest:
-                dest.write('\n'.join(combined))
+                for mmsi in combined:
+                    dest.write(mmsi + '\n')
+
+
     
+
 
 
 if __name__ == "__main__":
