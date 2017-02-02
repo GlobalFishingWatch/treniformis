@@ -7,6 +7,9 @@ Higher level changes affecting the API or data.
 0.5
 ---
 
+# [`#62`](https://github.com/GlobalFishingWatch/treniformis/pull/62/files)
+  Automate updating of sub-versions (only dates change)
+
 # [`#61`](https://github.com/GlobalFishingWatch/treniformis/pull/61)
   
    * Add CONSOLIDATED_LISTS from (same as nnet training lists)
