@@ -4,16 +4,34 @@ Changes
 Higher level changes affecting the API or data.
 
 
+0.5
+---
+
+# [`#61`](https://github.com/GlobalFishingWatch/treniformis/pull/61)
+  
+   * Add CONSOLIDATED_LISTS from (same as nnet training lists)
+
+   * Use consolidated lists to derive KNOWN_FISHING and KNOWN_NONFISHING
+
+   * Remove KNOWN_NONFISHING from KNOWN_AND_LIKELY fishing
+
+0.4
+---
+
+* [`#49`](https://github.com/GlobalFishingWatch/treniformis/pull/49)
+  Allow `treniformis` to be installed as an egg.
+
+
 0.3 - 2017-01-04
 ----------------
 
-# [`#47`]((https://github.com/GlobalFishingWatch/treniformis/pull/47)
+* [`#47`](https://github.com/GlobalFishingWatch/treniformis/pull/47)
   Move SQL version numbers into the SQL files as comments
 
-# [`#48`]((https://github.com/GlobalFishingWatch/treniformis/pull/48)
+* [`#48`](https://github.com/GlobalFishingWatch/treniformis/pull/48)
   Add vessels with more than 500 points per year.
 
-# [`#53`]((https://github.com/GlobalFishingWatch/treniformis/pull/53)
+* [`#53`](https://github.com/GlobalFishingWatch/treniformis/pull/53)
   Add type 19 messages to active vessels query; update dates and include 2017
   as a 12 month window.
 
