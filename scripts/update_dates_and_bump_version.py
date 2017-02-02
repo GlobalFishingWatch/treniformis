@@ -44,7 +44,7 @@ def update_config():
     with open(config_path, 'w') as f:
         yaml.dump(config, f)
 
-    return made_changes
+    return end if made_changes else False
 
 
 def bump_minor_version_number():
@@ -71,7 +71,8 @@ def bump_minor_version_number():
 
 
 if __name__ == '__main__':
-    if not update_config():
+    new_end_date = update_config()
+    if not new_end_date:
         print('No changes since last update, exiting')
         raise SystemExit()
     print('Updated "update_filter_lists_config.yml"')
@@ -91,7 +92,7 @@ if __name__ == '__main__':
     print("Committed changes")
 
     # Tag release
-    subprocess.call(['git', 'tag', '-a', new_version, '-m', 'Update lists with new date ranges'])
+    subprocess.call(['git', 'tag', '-a', new_version, '-m', 'Update lists through {}'.format(new_end_date)])
     subprocess.call(['git', 'push', 'origig', '-t', new_version])
     print("Tagged and pushed release")
 
