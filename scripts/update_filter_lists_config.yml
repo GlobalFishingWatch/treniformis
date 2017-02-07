@@ -1,4 +1,3 @@
-normalize_table_name: pipeline_740__normalize
 classify_table_name: pipeline_740__classify
 default_date_ranges:
 - ['2012-01-01', '2012-12-31']
@@ -6,4 +5,5 @@ default_date_ranges:
 - ['2014-01-01', '2014-12-31']
 - ['2015-01-01', '2015-12-31']
 - ['2016-01-01', '2016-12-31']
-- ['2016-01-03', '2017-01-01']
+- [2016-2-2016, '2017-02-03']
+normalize_table_name: pipeline_740__normalize

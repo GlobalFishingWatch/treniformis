@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
     # Commit changes
     subprocess.call(['git', 'add', '-u'])
-    subprocess.call(['git', 'commit' '-m', 'update to {}'.format(version)])
+    subprocess.call(['git', 'commit' '-m', 'update to {}'.format(new_version)])
     print("Committed changes")
 
     # Tag release
