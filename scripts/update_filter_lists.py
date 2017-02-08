@@ -44,7 +44,7 @@ def build_combined_fishing_list(base_path, year):
 
         
     known_fishing_path = 'GFW/FISHING_MMSI/KNOWN/ALL_YEARS.txt'
-    known_nonfishing_path = 'GFW/FISHING_MMSI/KNOWN/ALL_YEARS.txt'
+    known_nonfishing_path = 'GFW/NONFISHING_MMSI/KNOWN/ALL_YEARS.txt'
     likely_path = 'GFW/FISHING_MMSI/LIKELY/{}.txt'.format(year)
     active_path = 'GFW/ACTIVE_MMSI/{}.txt'.format(year)
 
