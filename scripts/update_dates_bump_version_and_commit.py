@@ -28,7 +28,7 @@ def update_config():
         else:
             # These ranges are inclusive so useing a full year gives 366 days
             first_day = last_valid_day - datetime.timedelta(days=364)
-            start = '{d.year}-{d.month}-{d.year}'.format(d=first_day)
+            start = '{d.year}-{d.month:02}-{d.day:02}'.format(d=first_day)
             end = '{d.year}-{d.month:02}-{d.day:02}'.format(d=last_valid_day)
             rng = [start, end]
         logging.info('\t%s', rng)
@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
     # Commit changes
     subprocess.call(['git', 'add', '-u'])
-    subprocess.call(['git', 'commit' '-m', 'update to {}'.format(new_version)])
+    subprocess.call(['git', 'commit', '-m', 'update to {}'.format(new_version)])
     print("Committed changes")
 
     # Tag release
