@@ -163,15 +163,23 @@ def update_derived_lists():
     # Update combined fishing list
     path = "GFW/FISHING_MMSI/KNOWN_AND_LIKELY"
     print("Updating", path)
+    any_year = set()
     for date_range in default_date_ranges:
             start_date, end_date = date_range
             year = end_date[:4]
             print(year)
             combined = build_combined_fishing_list(asset_dir, year)
+            any_year |= set(combined)
             dest_path = os.path.join(asset_dir, path, "{}.txt".format(year))
             with open(dest_path, "w") as dest:
                 for mmsi in combined:
                     dest.write(mmsi + '\n')
+    dest_path = os.path.join(asset_dir, path, "ANY_YEAR.txt")
+    with open(dest_path, "w") as dest:
+        for mmsi in sorted(any_year):
+            dest.write(mmsi + '\n')
+
+
 
 
     
