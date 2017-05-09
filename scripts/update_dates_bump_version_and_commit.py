@@ -2,7 +2,7 @@ import os
 import yaml
 import datetime
 import logging
-from utility import this_dir
+from utility import this_dir, asset_dir
 import subprocess
 from update_all import update_all
 
@@ -85,6 +85,10 @@ if __name__ == '__main__':
 
     # Make sure we are actually in git tree!
     os.chdir(this_dir)
+
+    # Add any new lists from neural net
+    vessel_lists_dir = os.path.join(asset_dir, "GFW/VESSEL_INFO/VESSEL_LISTS")
+    subprocess.call(['git', 'add', vessel_lists_dir])
 
     # Commit changes
     subprocess.call(['git', 'add', '-u'])
