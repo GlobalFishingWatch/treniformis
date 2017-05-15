@@ -30,6 +30,7 @@ def _parse_dunder(line):
 root_dir = os.path.dirname(__file__)
 data_files = []
 for root, _, paths in os.walk(os.path.join(root_dir, 'treniformis')):
+    root = "/".join(root.split("/", 1)[1:]) or "."
     paths = filter(lambda x: not x.startswith('.'), paths)
     for p in paths:
         name, ext = os.path.splitext(p)

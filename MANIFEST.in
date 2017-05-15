@@ -1,7 +1,8 @@
 include LICENSE.txt
 include MANIFEST.in
 include README.rst
-include  setup.cfg
+include VERSION
+include setup.cfg
 include setup.py
 recursive-include tests *.py
 recursive-include treniformis *.txt *.md *.csv
