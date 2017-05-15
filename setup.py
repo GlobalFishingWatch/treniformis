@@ -28,14 +28,15 @@ def _parse_dunder(line):
 
 
 root_dir = os.path.dirname(__file__)
+pkg_dir = os.path.join(root_dir, 'treniformis')
 data_files = []
-for root, _, paths in os.walk(os.path.join(root_dir, 'treniformis')):
-    root = "/".join(root.split("/", 1)[1:]) or "."
+for root, _, paths in os.walk(pkg_dir):
+    prefix = os.path.relpath(root, pkg_dir)
     paths = filter(lambda x: not x.startswith('.'), paths)
     for p in paths:
         name, ext = os.path.splitext(p)
         if ext not in ['.py', '.pyc']:
-            data_files.append(os.path.join(root, p))
+            data_files.append(os.path.join(prefix, p))
 
 
 version = None
