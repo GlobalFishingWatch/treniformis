@@ -73,12 +73,11 @@ def bump_minor_version_number():
 if __name__ == '__main__':
     new_end_date = update_config()
     if not new_end_date:
-        print('No changes since last update, exiting')
-        raise SystemExit()
-    print('Updated "update_filter_lists_config.yml"')
-
-    print('Updating Lists')
-    update_all()
+        logging.info('No changes since last update, skipping list update')
+    else:
+        print('Updated "update_filter_lists_config.yml"')
+        print('Updating Lists')
+        update_all()
 
     new_version = bump_minor_version_number()
     print("Bumped version to `{}`".format(new_version))
