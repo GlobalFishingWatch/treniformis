@@ -96,6 +96,7 @@ if __name__ == '__main__':
 
     # Tag release
     subprocess.call(['git', 'tag', '-a', new_version, '-m', 'Update lists through {}'.format(new_end_date)])
+    subprocess.call(['git', 'push', 'origin', 'master'])
     subprocess.call(['git', 'push', 'origin', new_version])
     print("Tagged and pushed release")
 
