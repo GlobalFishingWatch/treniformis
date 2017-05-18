@@ -109,6 +109,7 @@ def update_base_lists():
         
 # TODO: should pull from same source as mussidae   
 fishing_classes = {  'drifting_longlines',
+                     'fixed_gear',
                      'other_fishing',
                      'pole_and_line',
                      'pots_and_traps',
@@ -122,6 +123,7 @@ fishing_classes = {  'drifting_longlines',
 
 
 non_fishing_classes = {  'cargo',
+                         'cargo_or_tanker',
                          'motor_passenger',
                          'other_not_fishing',
                          'passenger',
@@ -129,7 +131,8 @@ non_fishing_classes = {  'cargo',
                          'sailing',
                          'seismic_vessel',
                          'tanker',
-                         'tug'}
+                         'tug',
+                         'gear'}
 
 def update_derived_lists():
     """Update lists created from base lists
@@ -179,9 +182,29 @@ def update_derived_lists():
         for mmsi in sorted(any_year):
             dest.write(mmsi + '\n')
 
+    # Update suspected fishing list
+    path = "GFW/FISHING_MMSI/SUSPECTED/ANY_YEAR.txt"
+    print("Updating", path)
+    joint = set(any_year)
+    with open(os.path.join(asset_dir, "GFW/VESSEL_INFO/VESSEL_LISTS/ALL_YEARS.csv")) as fin:
+        with open(os.path.join(asset_dir, path), 'w') as fout:
+            reader = csv.DictReader(fin)
+            for row in reader:
+                label = row['inferred']
+                if label in fishing_classes:
+                    mmsi = row['mmsi'].strip()
+                    joint.add(mmsi)
+                    fout.write(mmsi + '\n')
+                else:
+                    assert label in non_fishing_classes, "{} not in non-fishing".format(label)
 
-
-
+    # Update joint fishing list
+    path = "GFW/FISHING_MMSI/KNOWN_LIKELY_AND_SUSPECTED/ANY_YEAR.txt"
+    print("Updating", path)
+    any_year = set()
+    with open(os.path.join(asset_dir, path), 'w') as fout:
+        for mmsi in sorted(joint):
+            fout.write(str(mmsi) + '\n')
     
 
 
