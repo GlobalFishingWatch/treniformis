@@ -90,6 +90,12 @@ import six
 from treniformis import errors
 from pkg_resources import resource_stream
 
+def open(p):
+    try:
+        return resource_stream("treniformis", '_assets/' + p)
+    except IOError:
+        raise errors.TreniformisIOError(p)
+
 def get_annual_list(p):
     try:
         return resource_stream("treniformis", '_assets/' + p + '.txt')

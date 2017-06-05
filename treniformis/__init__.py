@@ -13,6 +13,7 @@ https://github.com/GlobalFishingWatch/treniformis
 
 
 from treniformis._mvp_api import get_annual_list
+from treniformis._mvp_api import open
 from treniformis._mvp_api import build_combined_fishing_list
 import pkg_resources
 
