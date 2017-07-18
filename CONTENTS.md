@@ -53,10 +53,12 @@
             - ATTRIBUTES_2017_5_18
             - ATTRIBUTES_2017_6_30
             - ATTRIBUTES_2017_7_1
+            - ATTRIBUTES_2017_7_10
             - ATTRIBUTES_2017_7_2
             - LABELS_2017_5_18
             - LABELS_2017_6_30
             - LABELS_2017_7_1
+            - LABELS_2017_7_10
             - LABELS_2017_7_2
 
 ---------
