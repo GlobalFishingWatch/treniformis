@@ -1,8 +1,8 @@
-classify_table_name: pipeline_740__classify
+classify_table_name: pipeline_classify_p_p516_daily
 default_date_ranges:
 - ['2012-01-01', '2012-12-31']
 - ['2013-01-01', '2013-12-31']
 - ['2014-01-01', '2014-12-31']
 - ['2015-01-01', '2015-12-31']
 - ['2016-01-01', '2016-12-31']
-normalize_table_name: pipeline_740__normalize
+normalize_table_name: pipeline_normalize_p_p516_daily
