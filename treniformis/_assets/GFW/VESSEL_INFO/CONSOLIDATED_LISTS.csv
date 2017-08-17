@@ -55756,6 +55756,10 @@ mmsi,label,length,engine_power,tonnage,split
 412440237,unknown_fishing,,,,Training
 412440238,drifting_longlines|set_longlines,,,,Training
 412440239,reefer,85.370000000000005,,2510.0,Training
+412440551,drifting_longlines,,,,
+412440549,drifting_longlines,,,,
+412440558,drifting_longlines,,,,
+412440552,drifting_longlines,,,,
 412441550,unknown_not_fishing,,,2083.0,Training
 412441670,cargo,,,1874.0,Training
 412441680,cargo,,,1874.0,Training
