@@ -5,4 +5,5 @@ default_date_ranges:
 - ['2014-01-01', '2014-12-31']
 - ['2015-01-01', '2015-12-31']
 - ['2016-01-01', '2016-12-31']
-normalize_table_name: pipeline_normalize_p_p516_daily
+- ['2016-08-14', '2017-08-13']
+normalize_table_name: pipeline_classify_p_p516_daily
