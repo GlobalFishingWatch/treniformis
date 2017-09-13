@@ -1,5 +1,6 @@
 from __future__ import print_function
 import bqtools
+import glob
 import treniformis
 import os
 import six
@@ -205,11 +206,32 @@ def update_derived_lists():
     with open(os.path.join(asset_dir, path), 'w') as fout:
         for mmsi in sorted(joint):
             fout.write(str(mmsi) + '\n')
-    
+
+
+def update_fishing_vessel_lists():
+    # Update fishing vessel lists based on vessel lists
+    base_path = "GFW/VESSEL_INFO/VESSEL_LISTS"
+    for in_path in glob.glob(os.path.join(asset_dir, base_path, "LABELS_????.csv")):
+        year = os.path.splitext(in_path)[0].rsplit('_', 1)[1]
+        out_path = os.path.join(os.path.join(asset_dir, base_path, "FISHING_LABELS_{}.csv".format(year)))
+        with open(in_path) as fin:
+            with open(out_path, 'w') as fout:
+                reader = csv.DictReader(fin)
+                writer = None
+                for row in reader:
+                    label = row['inferred']
+                    if label in fishing_classes:
+                        if writer is None:
+                            writer = csv.DictWriter(fout, reader.fieldnames)
+                            writer.writeheader()
+                        writer.writerow(row)
+                    else:
+                        assert label in non_fishing_classes, "{} not in non-fishing".format(label)
 
 
 
 if __name__ == "__main__":
     update_base_lists()
     update_derived_lists()
+    update_fishing_vessel_lists()
 
