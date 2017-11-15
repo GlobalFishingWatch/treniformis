@@ -1,13 +1,5 @@
 """Treniformis: Global Fishing Watch vessel lists
 
-Currently the API only produces paths to files, which should only be constructed
-like:
-
-    import treniformis
-    treniformis.get_annual_list('GFW/WKV/FISHING/LIKELY')
-
-and never directly constructed.  See the readme for more information.
-
 https://github.com/GlobalFishingWatch/treniformis
 """
 
