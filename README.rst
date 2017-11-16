@@ -13,8 +13,9 @@ Example
 .. code-block:: python
 
     import treniformis
-    treniformis.get_annual_list_path('GFW/WKV/FISHING/KNOWN/2016')
-
+    with treniformis.get_annual_list('GFW/FISHING_MMSI/KNOWN_AND_LIKELY/2016') as f:
+      for mmsi in f:
+        print mmsi
 
 Developing
 ----------
@@ -23,6 +24,8 @@ Developing
 
     $ git clone https://github.com/GlobalFishingWatch/treniformis
     $ cd treniformis
+    $ virtualenv venv
+    $ source venv/bin/activate
     $ pip install -e .\[all\]
     $ py.test --cov treniformis --cov-report term-missing
 
