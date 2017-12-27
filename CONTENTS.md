@@ -50,11 +50,25 @@
         - REEFERS
         * [VESSEL_LISTS](#link-12)
             - ALL_YEARS
+            - ATTRIBUTES_2017_12_24
             - ATTRIBUTES_2017_5_18
             - ATTRIBUTES_2017_6_30
             - ATTRIBUTES_2017_7_1
             - ATTRIBUTES_2017_7_10
             - ATTRIBUTES_2017_7_2
+            - FISHING_LABELS_2012
+            - FISHING_LABELS_2013
+            - FISHING_LABELS_2014
+            - FISHING_LABELS_2015
+            - FISHING_LABELS_2016
+            - FISHING_LABELS_2017
+            - LABELS_2012
+            - LABELS_2013
+            - LABELS_2014
+            - LABELS_2015
+            - LABELS_2016
+            - LABELS_2017
+            - LABELS_2017_12_24
             - LABELS_2017_5_18
             - LABELS_2017_6_30
             - LABELS_2017_7_1
