@@ -51,6 +51,7 @@
         * [VESSEL_LISTS](#link-12)
             - ALL_YEARS
             - ATTRIBUTES_2017_12_24
+            - ATTRIBUTES_2017_12_30
             - ATTRIBUTES_2017_5_18
             - ATTRIBUTES_2017_6_30
             - ATTRIBUTES_2017_7_1
@@ -69,6 +70,7 @@
             - LABELS_2016
             - LABELS_2017
             - LABELS_2017_12_24
+            - LABELS_2017_12_30
             - LABELS_2017_5_18
             - LABELS_2017_6_30
             - LABELS_2017_7_1
