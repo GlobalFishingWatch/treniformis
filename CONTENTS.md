@@ -57,6 +57,7 @@
             - ATTRIBUTES_2017_7_1
             - ATTRIBUTES_2017_7_10
             - ATTRIBUTES_2017_7_2
+            - ATTRIBUTES_2018_1_2
             - FISHING_LABELS_2012
             - FISHING_LABELS_2013
             - FISHING_LABELS_2014
@@ -76,6 +77,7 @@
             - LABELS_2017_7_1
             - LABELS_2017_7_10
             - LABELS_2017_7_2
+            - LABELS_2018_1_2
 
 ---------
 ## READMEs
