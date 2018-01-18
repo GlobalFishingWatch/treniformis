@@ -55747,6 +55747,7 @@ mmsi,label,length,engine_power,tonnage,split
 412439660,cargo,,,1018.0,Test
 412439770,cargo,,,1994.0,Training
 412440011,drifting_longlines,,,,Training
+412440016,,,,,Test
 412440029,drifting_longlines|set_longlines,,,,Training
 412440031,drifting_longlines|set_longlines,,,,Training
 412440032,drifting_longlines,,,,Test
@@ -64695,6 +64696,7 @@ mmsi,label,length,engine_power,tonnage,split
 533180172,cargo,,,,Training
 533180177,tanker,,,,Training
 533180179,motor_passenger,,,,Test
+533190908,,,,,Test
 533194000,tanker,,,,Training
 533333003,unknown_fishing,,,,Training
 533511000,cargo,,,,Training
@@ -74965,6 +74967,7 @@ mmsi,label,length,engine_power,tonnage,split
 900011937,unknown_not_fishing,,,,Training
 900012351,unknown_not_fishing,,,,Training
 900021712,unknown_fishing,,,,Training
+900028980,,,,,Test
 900200029,drifting_longlines,37.0,,317.0,Test
 900265007,squid_jigger,,,,Test
 9010000,drifting_longlines,31.199999999999999,,273.0,Training
