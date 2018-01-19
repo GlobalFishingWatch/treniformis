@@ -13,6 +13,7 @@
         - 2015
         - 2016
         - 2017
+        - 2018
     * FISHING_MMSI
         * [KNOWN](#link-3)
             - ALL_YEARS
@@ -23,6 +24,7 @@
             - 2015
             - 2016
             - 2017
+            - 2018
             - ANY_YEAR
         * KNOWN_LIKELY_AND_SUSPECTED
             - ANY_YEAR
@@ -33,6 +35,7 @@
             - 2015
             - 2016
             - 2017
+            - 2018
         * SUSPECTED
             - ANY_YEAR
     * NONFISHING_MMSI
@@ -45,6 +48,7 @@
         - 2015
         - 2016
         - 2017
+        - 2018
     * [VESSEL_INFO](#link-11)
         - CONSOLIDATED_LISTS
         - REEFERS
@@ -57,6 +61,7 @@
             - ATTRIBUTES_2017_7_1
             - ATTRIBUTES_2017_7_10
             - ATTRIBUTES_2017_7_2
+            - ATTRIBUTES_2018_1_16
             - ATTRIBUTES_2018_1_2
             - FISHING_LABELS_2012
             - FISHING_LABELS_2013
@@ -77,6 +82,7 @@
             - LABELS_2017_7_1
             - LABELS_2017_7_10
             - LABELS_2017_7_2
+            - LABELS_2018_1_16
             - LABELS_2018_1_2
 
 ---------
