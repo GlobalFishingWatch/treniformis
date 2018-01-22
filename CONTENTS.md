@@ -63,6 +63,7 @@
             - ATTRIBUTES_2017_7_2
             - ATTRIBUTES_2018_1_16
             - ATTRIBUTES_2018_1_17
+            - ATTRIBUTES_2018_1_18
             - ATTRIBUTES_2018_1_2
             - FISHING_LABELS_2012
             - FISHING_LABELS_2013
@@ -85,6 +86,7 @@
             - LABELS_2017_7_2
             - LABELS_2018_1_16
             - LABELS_2018_1_17
+            - LABELS_2018_1_18
             - LABELS_2018_1_2
 
 ---------
