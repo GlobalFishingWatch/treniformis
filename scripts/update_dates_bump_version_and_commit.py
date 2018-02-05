@@ -96,7 +96,7 @@ if __name__ == '__main__':
     # Commit changes
     update_paths = [os.path.join(gfw_dir, x) for x in [
         'ACTIVE_MMSI/20??.txt',
-        'KNOWN_AND_LIKELY/20??.txt',
+        'FISHING_MMSI/KNOWN_AND_LIKELY/20??.txt',
         'FISHING_MMSI/LIKELY/20??.txt',
         'SPOOFING_MMSI/20??.txt',
         ]]
