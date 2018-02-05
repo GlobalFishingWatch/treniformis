@@ -2,6 +2,7 @@ import os
 import yaml
 import datetime
 import logging
+import sys
 from utility import this_dir, asset_dir
 import subprocess
 from update_all import update_all
@@ -11,6 +12,9 @@ logging.getLogger().setLevel('INFO')
 INITIAL_YEAR = 2012
 LAG = 3
 
+this_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(this_dir)
+gfw_dir = os.path.join(parent_dir, 'treniformis/_assets/GFW/')
 
 def update_config():
     config_path = os.path.join(this_dir, 'update_filter_lists_config.yml')
@@ -90,6 +94,14 @@ if __name__ == '__main__':
     subprocess.call(['git', 'add', vessel_lists_dir])
 
     # Commit changes
+    update_paths = [os.path.join(gfw_dir, x) for x in [
+        'ACTIVE_MMSI/20??.txt',
+        'FISHING_MMSI/KNOWN_AND_LIKELY/20??.txt',
+        'FISHING_MMSI/LIKELY/20??.txt',
+        'SPOOFING_MMSI/20??.txt',
+        ]]
+    for pth in update_paths:
+        subprocess.call(['git', 'add', pth])
     subprocess.call(['git', 'add', '-u'])
     subprocess.call(['git', 'commit', '-m', 'update to {}'.format(new_version)])
     print("Committed changes")
