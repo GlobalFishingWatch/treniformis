@@ -22,7 +22,7 @@ def _get_mmsi_lists():
 
 
 # Files that should not be included in _get_csv_lists
-CSV_BLACKLIST = set()
+CSV_BLACKLIST = set(['mmsi-to-vessel-id.csv'])
 
 def _get_csv_lists():
     "Yields paths to files containing CSVs with a column named `mmsi`"
