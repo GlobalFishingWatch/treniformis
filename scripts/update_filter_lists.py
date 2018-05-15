@@ -280,22 +280,23 @@ def update_mapped_lists():
     idmap = dict(mmsi_ids)
     # Update lists by mapping mmsi to vessel_id
     for inglob in mapped_list_globs:
-        print(inglob)
         for inpath in glob.glob(os.path.join(asset_dir, inglob)):
-            print(inpath)
+            items = []
             outpath = inpath.replace('_MMSI/', '_VESSEL_IDS/')
             print("Updating {} from {}".format(outpath, inpath))
-            with open(inpath) as source, open(outpath, 'w') as sink:
-                for x in source.read().strip().split():
-                    sink.write(idmap[x] + '\n')
-
+            with open(inpath) as source:
+                items = [idmap[x] for x in source.read().strip().split()]
+                items.sort()
+            with open(outpath, 'w') as sink:
+                for x in items:
+                    sink.write(x + '\n')
 
 
 
 if __name__ == "__main__":
-    update_mappings()
-    update_base_lists()
-    update_derived_lists()
-    update_fishing_vessel_lists()
+    # update_mappings()
+    # update_base_lists()
+    # update_derived_lists()
+    # update_fishing_vessel_lists()
     update_mapped_lists()
 
