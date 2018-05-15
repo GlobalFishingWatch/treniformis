@@ -3,6 +3,14 @@ Changes
 
 Higher level changes affecting the API or data.
 
+
+0.7
+---
+
+# [`#75`](https://github.com/GlobalFishingWatch/treniformis/pull/75) 
+  Add vessel_ids lists.
+
+
 0.6
 ---
 
