@@ -48,7 +48,7 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
         count(*) c_msg,
         sum (shiptype_text = 'Fishing') c_fishing,
         sum (shiptype_text = 'Fishing') / count(*) fishing_msg_ratio
-      FROM (TABLE_DATE_RANGE([{normalize_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+      FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
       WHERE
         type in (5, 19, 24)
         and shiptype_text is not null
@@ -62,7 +62,7 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
     (
       SELECT
         integer(mmsi) as mmsi, COUNT(*) AS c_pos
-      FROM (TABLE_DATE_RANGE([{normalize_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+      FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
       WHERE
         lat IS NOT NULL AND lon IS NOT NULL
         and mmsi not in (987357573,987357579,987357559,986737000,983712160,987357529) // helicopters
