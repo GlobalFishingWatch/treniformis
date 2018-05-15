@@ -294,9 +294,9 @@ def update_mapped_lists():
 
 
 if __name__ == "__main__":
-    # update_mappings()
-    # update_base_lists()
-    # update_derived_lists()
-    # update_fishing_vessel_lists()
+    update_mappings()
+    update_base_lists()
+    update_derived_lists()
+    update_fishing_vessel_lists()
     update_mapped_lists()
 
