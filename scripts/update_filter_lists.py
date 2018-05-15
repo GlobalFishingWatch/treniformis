@@ -9,7 +9,7 @@ from utility import this_dir
 from utility import top_dir
 from utility import asset_dir
 from utility import default_date_ranges
-from utility import filter_lists
+from utility import filter_lists, filter_lists_2
 from utility import config
 
 def copy_to_sorted_mmsi(source_path, dest_path):
@@ -108,6 +108,43 @@ def update_base_lists():
         print("    {0}/{1} done".format(fl_path, year))
     os.unlink(tmp_path)
         
+
+
+def update_mappings():
+    """update lists derived for BiqQuery
+    """
+    bigq = bqtools.BigQuery()
+    queries = []
+    path_map = {}
+    print("Building queries")
+    for fl in filter_lists_2:
+        sql_path = os.path.join(this_dir, "sql", "{}.sql".format(fl.sql))
+        sql = open(sql_path).read()
+        # Create a query object for each date range so that we can
+        # run all ranges in parallel to speed things up
+        query = sql.format(**config)
+        gcs_path = gcs_path_template.format(len(path_map))
+        path_map[gcs_path] = fl.path
+        queries.append(dict(
+            proj_id=proj_id,
+            query=query,
+            format="CSV",
+            compression="NONE",
+            path=gcs_path,
+            use_legacy_sql=False))
+    # As each query finishes, copy the query to local temp dir
+    # and then move all but the first line (the header) to
+    # its final destination.
+    print("Waiting for results:")
+    for gcs_path in bigq.parallel_query_and_extract(queries):
+        fl_path = path_map[gcs_path]
+        bqtools.gs_mv(gcs_path, tmp_path)
+        dest_path = os.path.join(asset_dir, fl_path)
+        copy_to_sorted_mmsi(tmp_path, dest_path)
+        print("    {0} done".format(fl_path))
+    os.unlink(tmp_path)
+
+
 # TODO: should pull from same source as mussidae   
 fishing_classes = {  'drifting_longlines',
                      'fixed_gear',
@@ -228,10 +265,37 @@ def update_fishing_vessel_lists():
                     else:
                         assert label in non_fishing_classes, "{} not in non-fishing".format(label)
 
+mapped_list_globs = [
+    "GFW/ACTIVE_MMSI/*.txt",
+    "GFW/FISHING_MMSI/*/*.txt",
+    "GFW/SPOOFING_MMSI/*.txt",
+    "GFW/NONFISHING_MMSI/*.txt"
+]
+
+
+def update_mapped_lists():
+    mappath = os.path.join(asset_dir, 'GFW/ID_MAPS/mmsi-to-vessel-id.csv')
+    with open(mappath) as f:
+        mmsi_ids = [x.split(',') for x in f.read().strip().split()]
+    idmap = dict(mmsi_ids)
+    # Update lists by mapping mmsi to vessel_id
+    for inglob in mapped_list_globs:
+        print(inglob)
+        for inpath in glob.glob(os.path.join(asset_dir, inglob)):
+            print(inpath)
+            outpath = inpath.replace('_MMSI/', '_VESSEL_IDS/')
+            print("Updating {} from {}".format(outpath, inpath))
+            with open(inpath) as source, open(outpath, 'w') as sink:
+                for x in source.read().strip().split():
+                    sink.write(idmap[x] + '\n')
+
+
 
 
 if __name__ == "__main__":
+    update_mappings()
     update_base_lists()
     update_derived_lists()
     update_fishing_vessel_lists()
+    update_mapped_lists()
 
