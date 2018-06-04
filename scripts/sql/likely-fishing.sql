@@ -46,8 +46,8 @@ select a.mmsi as mmsi from
   SELECT
     mmsi,
     count(*) c_msg,
-    sum (IF((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel"), 1, 0) c_fishing,
-    sum (IF((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel"), 1, 0) / count(*) fishing_msg_ratio
+    sum ((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel")) c_fishing,
+    sum ((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel")) / count(*) fishing_msg_ratio
   FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
   WHERE
     type in (5, 19, 24)
