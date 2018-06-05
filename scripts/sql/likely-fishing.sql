@@ -53,6 +53,7 @@ select a.mmsi as mmsi from
     type in (5, 19, 24)
     and shiptype_text is not null
     and shiptype_text != 'Not available'
+    AND data_source IS NULL
   GROUP EACH BY
     mmsi
   HAVING
@@ -67,6 +68,7 @@ JOIN EACH
     lat IS NOT NULL AND lon IS NOT NULL
     and mmsi not in (987357573,987357579,987357559,986737000,983712160,987357529) // helicopters
     and speed > .1
+    AND data_source IS NULL
   GROUP BY
     mmsi
   HAVING

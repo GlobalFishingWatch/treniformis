@@ -18,7 +18,8 @@ FROM
   FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
   WHERE
     lat IS NOT NULL AND lon IS NOT NULL
-     and speed > .1 
+    AND speed > .1 
+    AND data_source IS NULL
   GROUP BY
     mmsi
   HAVING
