@@ -161,7 +161,8 @@ MMSIs with a minimum number of positional reports are included.
       FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
       WHERE
         lat IS NOT NULL AND lon IS NOT NULL
-         and speed > .1 
+        AND speed > .1 
+        AND data_source IS NULL
       GROUP BY
         mmsi
       HAVING
@@ -227,14 +228,14 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
       SELECT
         mmsi,
         count(*) c_msg,
-        sum (IF((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel"), 1, 0) c_fishing,
-        sum (IF((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel"), 1, 0) / count(*) fishing_msg_ratio
+        sum ((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel")) c_fishing,
+        sum ((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel")) / count(*) fishing_msg_ratio
       FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
       WHERE
         type in (5, 19, 24)
         and shiptype_text is not null
         and shiptype_text != 'Not available'
-        and data_source is null
+        AND data_source IS NULL
       GROUP EACH BY
         mmsi
       HAVING
@@ -249,6 +250,7 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
         lat IS NOT NULL AND lon IS NOT NULL
         and mmsi not in (987357573,987357579,987357559,986737000,983712160,987357529) // helicopters
         and speed > .1
+        AND data_source IS NULL
       GROUP BY
         mmsi
       HAVING
