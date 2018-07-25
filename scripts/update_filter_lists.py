@@ -277,7 +277,11 @@ def update_mapped_lists():
     mappath = os.path.join(asset_dir, 'GFW/ID_MAPS/mmsi-to-vessel-id.csv')
     with open(mappath) as f:
         mmsi_ids = [x.split(',') for x in f.read().strip().split()]
-    idmap = dict(mmsi_ids)
+    idmap = {}
+    for mmsi, id_ in mmsi_ids:
+        if mmsi not in idmap:
+            idmap[mmsi] = []
+        idmap[mmsi].append(id_)
     # Update lists by mapping mmsi to vessel_id
     for inglob in mapped_list_globs:
         for inpath in glob.glob(os.path.join(asset_dir, inglob)):
@@ -285,8 +289,11 @@ def update_mapped_lists():
             outpath = inpath.replace('_MMSI/', '_VESSEL_IDS/')
             print("Updating {} from {}".format(outpath, inpath))
             with open(inpath) as source:
-                items = [idmap[x] for x in source.read().strip().split()]
-                items.sort()
+                items = []
+                for x in source.read().strip().split():
+                    for y in idmap[x]:
+                        items.append(y)
+            items.sort()
             with open(outpath, 'w') as sink:
                 for x in items:
                     sink.write(x + '\n')

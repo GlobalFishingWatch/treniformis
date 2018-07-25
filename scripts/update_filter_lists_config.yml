@@ -1,4 +1,4 @@
-segment_identity_table: world-fishing-827.pipe_staging_a.segment_identity_
+segment_identity_table: world-fishing-827.pipe_production_b.segment_identity_
 classify_table_name: pipeline_p_p550_daily.classify_
 default_date_ranges:
 - ['2012-01-01', '2012-12-31']
@@ -7,4 +7,4 @@ default_date_ranges:
 - ['2015-01-01', '2015-12-31']
 - ['2016-01-01', '2016-12-31']
 - ['2017-01-01', '2017-12-31']
-- ['2017-05-16', '2018-05-15']
+- ['2017-07-25', '2018-07-25']
