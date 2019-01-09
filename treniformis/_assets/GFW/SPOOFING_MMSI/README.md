@@ -48,6 +48,7 @@ active time, then we know that some of the segments must overlap, and this is th
         FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
         WHERE
           RIGHT(seg_id, 3) != 'BAD'
+          AND data_source IS NULL
         GROUP BY
           mmsi,
           day )
@@ -67,6 +68,7 @@ active time, then we know that some of the segments must overlap, and this is th
         FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
         WHERE
           RIGHT(seg_id, 3) != 'BAD'
+          AND data_source IS NULL
         GROUP BY
           mmsi,
           seg_id )

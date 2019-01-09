@@ -14,6 +14,7 @@
         - 2016
         - 2017
         - 2018
+        - 2019
     * ACTIVE_VESSEL_IDS
         - 2012
         - 2013
@@ -33,6 +34,7 @@
             - 2016
             - 2017
             - 2018
+            - 2019
             - ANY_YEAR
         * KNOWN_LIKELY_AND_SUSPECTED
             - ANY_YEAR
@@ -44,6 +46,7 @@
             - 2016
             - 2017
             - 2018
+            - 2019
         * SUSPECTED
             - ANY_YEAR
     * FISHING_VESSEL_IDS
@@ -71,7 +74,6 @@
         * SUSPECTED
             - ANY_YEAR
     * ID_MAPS
-        - mmsi-to-vessel-id
     * NONFISHING_MMSI
         * [KNOWN](#link-17)
             - ALL_YEARS
@@ -84,6 +86,7 @@
         - 2016
         - 2017
         - 2018
+        - 2019
     * SPOOFING_VESSEL_IDS
         - 2012
         - 2013
@@ -97,7 +100,6 @@
         - REEFERS
         * [VESSEL_LISTS](#link-22)
             - ALL_YEARS
-            - ALL_YEARS_current
             - ATTRIBUTES_2017_12_24
             - ATTRIBUTES_2017_12_30
             - ATTRIBUTES_2017_5_18
@@ -319,6 +321,7 @@ active time, then we know that some of the segments must overlap, and this is th
         FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
         WHERE
           RIGHT(seg_id, 3) != 'BAD'
+          AND data_source IS NULL
         GROUP BY
           mmsi,
           day )
@@ -338,6 +341,7 @@ active time, then we know that some of the segments must overlap, and this is th
         FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
         WHERE
           RIGHT(seg_id, 3) != 'BAD'
+          AND data_source IS NULL
         GROUP BY
           mmsi,
           seg_id )

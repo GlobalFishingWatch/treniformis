@@ -21,6 +21,3 @@ filter_lists = [
     FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing", default_date_ranges),
 ]
 
-filter_lists_2 = [
-    FilterList("GFW/ID_MAPS/mmsi-to-vessel-id.csv", "mmsi-to-vessel-id", None),
-]
