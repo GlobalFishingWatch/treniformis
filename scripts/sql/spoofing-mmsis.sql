@@ -45,9 +45,10 @@ FROM (
       COUNT(*) message_count,
       MIN(TIMESTAMP_TO_SEC(timestamp)) AS min_timestamp,
       MAX(TIMESTAMP_TO_SEC(timestamp)) AS max_timestamp
-    FROM (TABLE_DATE_RANGE([{classify_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+    FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
     WHERE
       RIGHT(seg_id, 3) != 'BAD'
+      AND data_source IS NULL
     GROUP BY
       mmsi,
       day )
@@ -64,9 +65,10 @@ JOIN (
       COUNT(*) AS message_count,
       MIN(TIMESTAMP_TO_SEC(timestamp)) AS min_timestamp,
       MAX(TIMESTAMP_TO_SEC(timestamp)) AS max_timestamp
-    FROM (TABLE_DATE_RANGE([{classify_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+    FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
     WHERE
       RIGHT(seg_id, 3) != 'BAD'
+      AND data_source IS NULL
     GROUP BY
       mmsi,
       seg_id )

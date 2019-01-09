@@ -107,7 +107,8 @@ def update_base_lists():
         copy_to_sorted_mmsi(tmp_path, dest_path)
         print("    {0}/{1} done".format(fl_path, year))
     os.unlink(tmp_path)
-        
+
+
 # TODO: should pull from same source as mussidae   
 fishing_classes = {  'drifting_longlines',
                      'fixed_gear',
@@ -234,4 +235,5 @@ if __name__ == "__main__":
     update_base_lists()
     update_derived_lists()
     update_fishing_vessel_lists()
+    update_mapped_lists()
 

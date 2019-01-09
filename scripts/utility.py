@@ -20,3 +20,4 @@ filter_lists = [
     FilterList("GFW/SPOOFING_MMSI", "spoofing-mmsis", default_date_ranges),
     FilterList("GFW/FISHING_MMSI/LIKELY", "likely-fishing", default_date_ranges),
 ]
+

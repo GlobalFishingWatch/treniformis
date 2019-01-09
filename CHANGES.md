@@ -3,6 +3,14 @@ Changes
 
 Higher level changes affecting the API or data.
 
+
+0.7
+---
+
+# [`#79`](https://github.com/GlobalFishingWatch/treniformis/pull/79) 
+  Update for 2019.
+
+
 0.6
 ---
 

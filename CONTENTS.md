@@ -14,6 +14,7 @@
         - 2016
         - 2017
         - 2018
+        - 2019
     * FISHING_MMSI
         * [KNOWN](#link-3)
             - ALL_YEARS
@@ -25,6 +26,7 @@
             - 2016
             - 2017
             - 2018
+            - 2019
             - ANY_YEAR
         * KNOWN_LIKELY_AND_SUSPECTED
             - ANY_YEAR
@@ -36,12 +38,14 @@
             - 2016
             - 2017
             - 2018
+            - 2019
         * SUSPECTED
             - ANY_YEAR
+    * ID_MAPS
     * NONFISHING_MMSI
-        * [KNOWN](#link-9)
+        * [KNOWN](#link-10)
             - ALL_YEARS
-    * [SPOOFING_MMSI](#link-10)
+    * [SPOOFING_MMSI](#link-11)
         - 2012
         - 2013
         - 2014
@@ -49,10 +53,11 @@
         - 2016
         - 2017
         - 2018
-    * [VESSEL_INFO](#link-11)
+        - 2019
+    * [VESSEL_INFO](#link-12)
         - CONSOLIDATED_LISTS
         - REEFERS
-        * [VESSEL_LISTS](#link-12)
+        * [VESSEL_LISTS](#link-13)
             - ALL_YEARS
             - ATTRIBUTES_2017_12_24
             - ATTRIBUTES_2017_12_30
@@ -114,10 +119,11 @@ MMSIs with a minimum number of positional reports are included.
     (
       SELECT
         mmsi, count(*) as c_pos
-      FROM (TABLE_DATE_RANGE([{normalize_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+      FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
       WHERE
         lat IS NOT NULL AND lon IS NOT NULL
-         and speed > .1 
+        AND speed > .1 
+        AND data_source IS NULL
       GROUP BY
         mmsi
       HAVING
@@ -183,13 +189,14 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
       SELECT
         mmsi,
         count(*) c_msg,
-        sum (shiptype_text = 'Fishing') c_fishing,
-        sum (shiptype_text = 'Fishing') / count(*) fishing_msg_ratio
-      FROM (TABLE_DATE_RANGE([{normalize_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+        sum ((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel")) c_fishing,
+        sum ((shiptype_text = 'Fishing') OR (shiptype_text = "Fishing Vessel")) / count(*) fishing_msg_ratio
+      FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
       WHERE
         type in (5, 19, 24)
         and shiptype_text is not null
         and shiptype_text != 'Not available'
+        AND data_source IS NULL
       GROUP EACH BY
         mmsi
       HAVING
@@ -199,11 +206,12 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
     (
       SELECT
         integer(mmsi) as mmsi, COUNT(*) AS c_pos
-      FROM (TABLE_DATE_RANGE([{normalize_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+      FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
       WHERE
         lat IS NOT NULL AND lon IS NOT NULL
         and mmsi not in (987357573,987357579,987357559,986737000,983712160,987357529) // helicopters
         and speed > .1
+        AND data_source IS NULL
       GROUP BY
         mmsi
       HAVING
@@ -213,14 +221,14 @@ https://docs.google.com/spreadsheets/d/12OVeOxg9N1NViKxH4B7nW31-MwAHW_mS3zPBe2kf
 
 --------
 
-<a name="link-9"></a>
+<a name="link-10"></a>
 ### GFW/NONFISHING_MMSI/KNOWN [[toc]](#contents)
 
 Known non-fishing vessels derived from GFW/VESSEL_INFO/CONSOLIDATED_LISTS.csv.
 
 --------
 
-<a name="link-10"></a>
+<a name="link-11"></a>
 ### GFW/SPOOFING_MMSI [[toc]](#contents)
 
 [comment]: # (DO NOT EDIT; GENERATED FILE)
@@ -269,9 +277,10 @@ active time, then we know that some of the segments must overlap, and this is th
           COUNT(*) message_count,
           MIN(TIMESTAMP_TO_SEC(timestamp)) AS min_timestamp,
           MAX(TIMESTAMP_TO_SEC(timestamp)) AS max_timestamp
-        FROM (TABLE_DATE_RANGE([{classify_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+        FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
         WHERE
           RIGHT(seg_id, 3) != 'BAD'
+          AND data_source IS NULL
         GROUP BY
           mmsi,
           day )
@@ -288,9 +297,10 @@ active time, then we know that some of the segments must overlap, and this is th
           COUNT(*) AS message_count,
           MIN(TIMESTAMP_TO_SEC(timestamp)) AS min_timestamp,
           MAX(TIMESTAMP_TO_SEC(timestamp)) AS max_timestamp
-        FROM (TABLE_DATE_RANGE([{classify_table_name}.], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
+        FROM (TABLE_DATE_RANGE([{classify_table_name}], TIMESTAMP('{start_date}'), TIMESTAMP('{end_date}')))
         WHERE
           RIGHT(seg_id, 3) != 'BAD'
+          AND data_source IS NULL
         GROUP BY
           mmsi,
           seg_id )
@@ -303,7 +313,7 @@ active time, then we know that some of the segments must overlap, and this is th
 
 --------
 
-<a name="link-11"></a>
+<a name="link-12"></a>
 ### GFW/VESSEL_INFO [[toc]](#contents)
 
 CONSOLIDATED_LISTS.csv
@@ -352,7 +362,7 @@ Fields:
 
 --------
 
-<a name="link-12"></a>
+<a name="link-13"></a>
 ### GFW/VESSEL_INFO/VESSEL_LISTS [[toc]](#contents)
 
 Vessel lists generated by the neural net go here
